@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cancer &amp; AI — Joe Foreman</title>
+  <meta name="description" content="Research and resources on cancer metabolism, nutrition, and AI-assisted analysis." />
+
+  <!-- Cloudflare Web Analytics — uncomment and add token when ready -->
+  <!-- <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
+    data-cf-beacon='{"token": "PASTE_YOUR_TOKEN_HERE"}'></script> -->
+
+  <style>
+    :root {
+      --color-bg:        #0f1117;
+      --color-surface:   #1a1d27;
+      --color-border:    #2a2d3a;
+      --color-accent:    #4f7ef8;
+      --color-text:      #e8eaf0;
+      --color-muted:     #8b8fa8;
+      --radius:          12px;
+      --max-width:       860px;
+      --font-sans:       'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--color-bg); color: var(--color-text); font-family: var(--font-sans); line-height: 1.65; min-height: 100vh; }
+    a { color: var(--color-accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: rgba(15,17,23,0.88);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+    }
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px; max-width: 1100px; margin: 0 auto; padding: 0 24px;
+    }
+    .nav-back { font-size: 0.9rem; color: var(--color-muted); transition: color 0.2s; }
+    .nav-back:hover { color: var(--color-text); text-decoration: none; }
+    .nav-title { font-size: 1rem; font-weight: 700; color: var(--color-text); }
+
+    .page { max-width: var(--max-width); margin: 0 auto; padding: 64px 24px 96px; }
+
+    .page-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--color-accent); background: rgba(79,126,248,0.1);
+      border-radius: 6px; padding: 4px 12px; margin-bottom: 20px;
+    }
+    .page-title {
+      font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 800;
+      letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 14px;
+    }
+    .page-subtitle { font-size: 1.05rem; color: var(--color-muted); margin-bottom: 52px; padding-bottom: 48px; border-bottom: 1px solid var(--color-border); }
+
+    .articles { display: flex; flex-direction: column; gap: 20px; }
+
+    .article-card {
+      display: flex; align-items: center; gap: 24px;
+      background: var(--color-surface); border: 1px solid var(--color-border);
+      border-radius: var(--radius); padding: 28px 32px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .article-card:hover { border-color: var(--color-accent); transform: translateY(-2px); text-decoration: none; }
+
+    .article-icon { font-size: 2rem; flex-shrink: 0; }
+
+    .article-body {}
+    .article-title { font-size: 1.15rem; font-weight: 700; color: var(--color-text); margin-bottom: 6px; }
+    .article-desc { font-size: 0.9rem; color: var(--color-muted); }
+    .article-arrow { margin-left: auto; font-size: 1.2rem; color: var(--color-accent); flex-shrink: 0; }
+
+    footer {
+      background: var(--color-surface); border-top: 1px solid var(--color-border);
+      padding: 32px 0; text-align: center; font-size: 0.82rem; color: var(--color-muted);
+    }
+    footer a { color: var(--color-muted); }
+    footer a:hover { color: var(--color-text); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a class="nav-back" href="/">← Joe Foreman</a>
+      <span class="nav-title">Cancer &amp; AI</span>
+    </nav>
+  </header>
+
+  <main class="page">
+    <span class="page-tag">Health &amp; Research</span>
+    <h1 class="page-title">Cancer &amp; AI</h1>
+    <p class="page-subtitle">
+      AI-assisted research into cancer metabolism, nutrition, and the science
+      of what feeds — and what starves — tumors.
+    </p>
+
+    <div class="articles">
+
+      <a class="article-card" href="cancer-foods.html">
+        <span class="article-icon">🥩</span>
+        <div class="article-body">
+          <div class="article-title">Foods That Feed Cancer</div>
+          <p class="article-desc">A breakdown of the foods and dietary patterns that research links to tumor growth and cancer progression.</p>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
+
+      <a class="article-card" href="cancer-fuel.html">
+        <span class="article-icon">🔬</span>
+        <div class="article-body">
+          <div class="article-title">What Cancer Feeds On — Tumor Metabolic Fuels</div>
+          <p class="article-desc">A deep dive into the metabolic pathways tumors exploit — glucose, glutamine, lipids, and beyond.</p>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
+
+    </div>
+  </main>
+
+  <footer>
+    &copy; <span id="yr"></span> Joe Foreman. All rights reserved.
+    <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+  </footer>
+
+</body>
+</html>

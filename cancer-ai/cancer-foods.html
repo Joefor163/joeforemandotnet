@@ -1,0 +1,656 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Foods That Feed Cancer</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0d0d0d;
+      --surface: #161616;
+      --card: #1c1c1c;
+      --border: #2a2a2a;
+      --red: #e53e3e;
+      --red-dark: #c53030;
+      --orange: #dd6b20;
+      --yellow: #d69e2e;
+      --text: #e2e8f0;
+      --muted: #718096;
+      --accent: #fc8181;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      min-height: 100vh;
+    }
+
+    /* ── HEADER ── */
+    header {
+      background: linear-gradient(135deg, #1a0000 0%, #0d0d0d 60%, #1a0a00 100%);
+      border-bottom: 1px solid #3d0000;
+      padding: 3rem 1.5rem 2.5rem;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+    header::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(ellipse 80% 60% at 50% 0%, rgba(229,62,62,.15) 0%, transparent 70%);
+      pointer-events: none;
+    }
+    header h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: #fff;
+      position: relative;
+    }
+    header h1 span { color: var(--accent); }
+    header p.subtitle {
+      margin-top: .75rem;
+      font-size: 1.1rem;
+      color: var(--muted);
+      max-width: 640px;
+      margin-left: auto;
+      margin-right: auto;
+      position: relative;
+    }
+    .warning-banner {
+      margin-top: 1.5rem;
+      display: inline-flex;
+      align-items: center;
+      gap: .5rem;
+      background: rgba(229,62,62,.12);
+      border: 1px solid rgba(229,62,62,.35);
+      border-radius: 8px;
+      padding: .6rem 1.2rem;
+      font-size: .85rem;
+      color: #fc8181;
+      position: relative;
+    }
+
+    /* ── LAYOUT ── */
+    main {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 2.5rem 1.5rem 4rem;
+    }
+
+    /* ── INTRO ── */
+    .intro-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-left: 4px solid var(--red);
+      border-radius: 10px;
+      padding: 1.5rem 1.75rem;
+      margin-bottom: 3rem;
+      font-size: .975rem;
+      color: #cbd5e0;
+    }
+    .intro-box strong { color: var(--accent); }
+
+    /* ── SECTION TITLE ── */
+    .section-title {
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1.25rem;
+      padding-bottom: .5rem;
+      border-bottom: 2px solid #2d0000;
+      display: flex;
+      align-items: center;
+      gap: .6rem;
+    }
+    .section-title .icon { font-size: 1.4rem; }
+
+    /* ── GRID ── */
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3rem;
+    }
+
+    /* ── CARD ── */
+    .card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .card:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 8px 30px rgba(229,62,62,.15);
+    }
+    .card-header {
+      padding: 1rem 1.25rem .75rem;
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      border-bottom: 1px solid var(--border);
+    }
+    .card-icon { font-size: 2rem; line-height: 1; }
+    .card-title {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .card-subtitle {
+      font-size: .75rem;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+    .card-body { padding: 1rem 1.25rem 1.25rem; }
+    .card-body p {
+      font-size: .875rem;
+      color: #a0aec0;
+      line-height: 1.65;
+    }
+
+    /* severity badge */
+    .badge {
+      display: inline-block;
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .05em;
+      text-transform: uppercase;
+      padding: 2px 8px;
+      border-radius: 999px;
+      margin-left: auto;
+      flex-shrink: 0;
+    }
+    .badge-high   { background: rgba(229,62,62,.2);  color: #fc8181; border: 1px solid rgba(229,62,62,.4); }
+    .badge-medium { background: rgba(221,107,32,.2); color: #f6ad55; border: 1px solid rgba(221,107,32,.4); }
+    .badge-low    { background: rgba(214,158,46,.2); color: #f6e05e; border: 1px solid rgba(214,158,46,.4); }
+
+    /* ── MECHANISM TAGS ── */
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-top: .85rem;
+    }
+    .tag {
+      font-size: .7rem;
+      background: #242424;
+      border: 1px solid #333;
+      color: #718096;
+      border-radius: 5px;
+      padding: 2px 8px;
+    }
+
+    /* ── STAT STRIP ── */
+    .stat-strip {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(160px, 1fr));
+      gap: 1rem;
+      margin-bottom: 3rem;
+    }
+    .stat-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.25rem 1rem;
+      text-align: center;
+    }
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 800;
+      color: var(--accent);
+      line-height: 1;
+    }
+    .stat-label {
+      font-size: .8rem;
+      color: var(--muted);
+      margin-top: .4rem;
+    }
+
+    /* ── MECHANISM EXPLAINER ── */
+    .mechanism-list {
+      list-style: none;
+      margin-bottom: 3rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+      gap: 1rem;
+    }
+    .mechanism-list li {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1rem 1.25rem;
+    }
+    .mechanism-list li h4 {
+      font-size: .9rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: .35rem;
+      display: flex;
+      align-items: center;
+      gap: .4rem;
+    }
+    .mechanism-list li p {
+      font-size: .8rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── SOURCES ── */
+    .sources {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 10px;
+      padding: 1.5rem 1.75rem;
+    }
+    .sources h3 {
+      font-size: 1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1rem;
+    }
+    .sources ol {
+      padding-left: 1.25rem;
+    }
+    .sources ol li {
+      font-size: .8rem;
+      color: var(--muted);
+      margin-bottom: .5rem;
+      line-height: 1.5;
+    }
+    .sources a {
+      color: #63b3ed;
+      text-decoration: none;
+      word-break: break-all;
+    }
+    .sources a:hover { text-decoration: underline; }
+    .sources .disclaimer {
+      margin-top: 1.25rem;
+      font-size: .75rem;
+      color: #4a5568;
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+    }
+
+    @media (max-width: 600px) {
+      .grid { grid-template-columns: 1fr; }
+      .stat-strip { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+<nav style="position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;height:52px;padding:0 24px;background:rgba(13,13,13,0.9);backdrop-filter:blur(10px);border-bottom:1px solid #2a2a2a;font-family:'Segoe UI',system-ui,sans-serif;">
+  <a href="/cancer-ai/" style="color:#718096;font-size:0.88rem;text-decoration:none;">← Cancer &amp; AI</a>
+  <a href="/" style="color:#718096;font-size:0.88rem;text-decoration:none;">Joe Foreman</a>
+</nav>
+
+<header>
+  <h1>Foods That <span>Feed Cancer</span></h1>
+  <p class="subtitle">A research-backed overview of dietary patterns and substances that promote tumor growth, fuel cancer metabolism, or increase cancer risk.</p>
+  <div class="warning-banner">
+    ⚠️ Educational content only — always consult a qualified healthcare provider for medical advice.
+  </div>
+</header>
+
+<main>
+
+  <!-- KEY STATS -->
+  <div class="stat-strip">
+    <div class="stat-box">
+      <div class="stat-num">30–40%</div>
+      <div class="stat-label">of cancers linked to diet &amp; lifestyle</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">18×</div>
+      <div class="stat-label">more glucose consumed by cancer cells (Warburg effect)</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">#1</div>
+      <div class="stat-label">processed meat classified as Group 1 carcinogen (IARC)</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num">13</div>
+      <div class="stat-label">types of cancer linked to excess body weight</div>
+    </div>
+  </div>
+
+  <!-- INTRO -->
+  <div class="intro-box">
+    Cancer cells undergo <strong>metabolic reprogramming</strong> — they rewire how they consume energy, preferring fermentable fuels like glucose and glutamine even when oxygen is available (the Warburg effect). Certain dietary patterns supply these fuels in excess, promote chronic inflammation, drive insulin resistance, and alter the gut microbiome in ways that accelerate tumor growth. The foods below have been associated with increased cancer risk or tumor promotion through peer-reviewed research.
+  </div>
+
+  <!-- SECTION 1: PRIMARY FUELS -->
+  <h2 class="section-title"><span class="icon">🔥</span> Primary Fuels Cancer Exploits</h2>
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🍬</div>
+        <div>
+          <div class="card-title">Added Sugars &amp; Refined Carbohydrates</div>
+          <div class="card-subtitle">Glucose — cancer's preferred fuel</div>
+        </div>
+        <span class="badge badge-high">High Risk</span>
+      </div>
+      <div class="card-body">
+        <p>Cancer cells consume glucose at dramatically higher rates than normal cells. High dietary sugar spikes blood glucose and insulin, activating growth signaling pathways (PI3K/AKT/mTOR) that directly stimulate tumor proliferation. Refined carbs — white bread, white rice, pastries — behave identically.</p>
+        <div class="tags">
+          <span class="tag">Warburg effect</span>
+          <span class="tag">Insulin spike</span>
+          <span class="tag">PI3K/mTOR activation</span>
+          <span class="tag">IGF-1 elevation</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🥤</div>
+        <div>
+          <div class="card-title">Sugary Beverages</div>
+          <div class="card-subtitle">Sodas, fruit juices, energy drinks</div>
+        </div>
+        <span class="badge badge-high">High Risk</span>
+      </div>
+      <div class="card-body">
+        <p>Liquid sugar is absorbed faster than solid food, causing sharper insulin spikes. Studies link high sugary-drink consumption with elevated serum IGF-1 levels — a potent growth factor that drives breast, colorectal, and prostate cancer cell proliferation. They also promote obesity, itself a major cancer driver.</p>
+        <div class="tags">
+          <span class="tag">IGF-1 elevation</span>
+          <span class="tag">Insulin resistance</span>
+          <span class="tag">Obesity driver</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🥩</div>
+        <div>
+          <div class="card-title">Processed Meats</div>
+          <div class="card-subtitle">Bacon, sausage, hot dogs, deli meat</div>
+        </div>
+        <span class="badge badge-high">High Risk</span>
+      </div>
+      <div class="card-body">
+        <p>Classified as a Group 1 carcinogen by the International Agency for Research on Cancer (IARC). Nitrosamines formed during curing, polycyclic aromatic hydrocarbons from smoking, and heme iron all damage DNA and promote colorectal cancer. Even 50 g/day (about 2 strips of bacon) raises colorectal cancer risk by ~18%.</p>
+        <div class="tags">
+          <span class="tag">Nitrosamines</span>
+          <span class="tag">DNA damage</span>
+          <span class="tag">Colorectal cancer</span>
+          <span class="tag">Heme iron</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🥓</div>
+        <div>
+          <div class="card-title">Red Meat (excess)</div>
+          <div class="card-subtitle">Beef, lamb, pork — especially charred</div>
+        </div>
+        <span class="badge badge-medium">Moderate Risk</span>
+      </div>
+      <div class="card-body">
+        <p>Classified as Group 2A (probably carcinogenic). High-temperature cooking produces heterocyclic amines (HCAs) and polycyclic aromatic hydrocarbons (PAHs) — potent mutagens. Excess heme iron generates reactive oxygen species that damage the intestinal lining. Strongly associated with colorectal and pancreatic cancers.</p>
+        <div class="tags">
+          <span class="tag">HCAs &amp; PAHs</span>
+          <span class="tag">Oxidative stress</span>
+          <span class="tag">Colorectal risk</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🍟</div>
+        <div>
+          <div class="card-title">Ultra-Processed Foods</div>
+          <div class="card-subtitle">Fast food, packaged snacks, instant noodles</div>
+        </div>
+        <span class="badge badge-high">High Risk</span>
+      </div>
+      <div class="card-body">
+        <p>Diets high in ultra-processed foods are strongly associated with increased cancer incidence. These foods combine added sugars, trans fats, refined carbs, artificial additives, and excess sodium — all of which promote chronic inflammation, insulin resistance, and obesity, creating a systemic environment that favors cancer growth.</p>
+        <div class="tags">
+          <span class="tag">Chronic inflammation</span>
+          <span class="tag">Insulin resistance</span>
+          <span class="tag">Gut dysbiosis</span>
+          <span class="tag">Obesity</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🍺</div>
+        <div>
+          <div class="card-title">Alcohol</div>
+          <div class="card-subtitle">Beer, wine, spirits</div>
+        </div>
+        <span class="badge badge-high">High Risk</span>
+      </div>
+      <div class="card-body">
+        <p>Ethanol is metabolized to acetaldehyde — a direct carcinogen that forms DNA adducts, impairing DNA repair. Alcohol also generates reactive oxygen species, disrupts folate metabolism (essential for DNA integrity), acts as a solvent for other carcinogens, and elevates estrogen levels. Linked to mouth, throat, esophagus, liver, breast, and colorectal cancers.</p>
+        <div class="tags">
+          <span class="tag">Acetaldehyde</span>
+          <span class="tag">DNA adducts</span>
+          <span class="tag">Folate disruption</span>
+          <span class="tag">Estrogen elevation</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- SECTION 2: PRO-INFLAMMATORY FOODS -->
+  <h2 class="section-title"><span class="icon">🔴</span> Pro-Inflammatory &amp; Tumor-Promoting Foods</h2>
+  <div class="grid">
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🛢️</div>
+        <div>
+          <div class="card-title">Trans Fats &amp; Refined Seed Oils</div>
+          <div class="card-subtitle">Margarine, partially hydrogenated oils, omega-6 excess</div>
+        </div>
+        <span class="badge badge-high">High Risk</span>
+      </div>
+      <div class="card-body">
+        <p>Industrial trans fats promote systemic inflammation, disrupt cell membrane integrity, and impair immune surveillance. An imbalanced omega-6:omega-3 ratio (common in Western diets) shifts the body toward a pro-inflammatory state that supports tumor survival and angiogenesis.</p>
+        <div class="tags">
+          <span class="tag">Systemic inflammation</span>
+          <span class="tag">Omega-6 imbalance</span>
+          <span class="tag">Immune suppression</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🫙</div>
+        <div>
+          <div class="card-title">High-Fat Diets &amp; Saturated Fats</div>
+          <div class="card-subtitle">Excess calories from animal fats</div>
+        </div>
+        <span class="badge badge-medium">Moderate Risk</span>
+      </div>
+      <div class="card-body">
+        <p>High-fat diets promote obesity — a major cancer risk factor linked to 13+ cancer types. In pancreatic and ovarian cancer models, high-fat diets significantly accelerated tumor growth, partly by altering the tumor microenvironment and increasing adipose-derived inflammatory cytokines (e.g., IL-6).</p>
+        <div class="tags">
+          <span class="tag">Obesity</span>
+          <span class="tag">Adipose inflammation</span>
+          <span class="tag">Cytokine signaling</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🧂</div>
+        <div>
+          <div class="card-title">High-Salt &amp; Salt-Preserved Foods</div>
+          <div class="card-subtitle">Pickled foods, salted fish, excess sodium</div>
+        </div>
+        <span class="badge badge-medium">Moderate Risk</span>
+      </div>
+      <div class="card-body">
+        <p>High salt intake damages the stomach lining, allowing H. pylori infection to thrive and promoting chronic gastric inflammation. Salt-preserved and smoked fish contain nitrosamines. Strongly linked to stomach and nasopharyngeal cancers, particularly in East Asian populations.</p>
+        <div class="tags">
+          <span class="tag">Gastric damage</span>
+          <span class="tag">H. pylori synergy</span>
+          <span class="tag">Nitrosamines</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🌽</div>
+        <div>
+          <div class="card-title">High-Fructose Corn Syrup</div>
+          <div class="card-subtitle">Sweetened snacks, condiments, processed foods</div>
+        </div>
+        <span class="badge badge-high">High Risk</span>
+      </div>
+      <div class="card-body">
+        <p>Fructose is metabolized differently from glucose — it is processed almost entirely in the liver, promoting non-alcoholic fatty liver disease, insulin resistance, and lipogenesis. Tumors can directly use fructose via the polyol pathway for growth. Excess fructose has been linked to hepatocellular and colorectal cancers.</p>
+        <div class="tags">
+          <span class="tag">Hepatic lipogenesis</span>
+          <span class="tag">Liver cancer risk</span>
+          <span class="tag">Metabolic reprogramming</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🥛</div>
+        <div>
+          <div class="card-title">Excess Dairy (High-Fat)</div>
+          <div class="card-subtitle">Full-fat dairy in large quantities</div>
+        </div>
+        <span class="badge badge-low">Lower Risk</span>
+      </div>
+      <div class="card-body">
+        <p>High dairy fat intake has been associated with elevated IGF-1 levels. Some studies associate very high dairy consumption with increased prostate cancer risk, potentially via IGF-1 and saturated fat-driven hormonal changes. Evidence is mixed — low-fat dairy may reduce colorectal cancer risk.</p>
+        <div class="tags">
+          <span class="tag">IGF-1 elevation</span>
+          <span class="tag">Hormonal modulation</span>
+          <span class="tag">Prostate cancer</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="card">
+      <div class="card-header">
+        <div class="card-icon">🐟</div>
+        <div>
+          <div class="card-title">TMAO-Generating Foods</div>
+          <div class="card-subtitle">Red meat, eggs, some seafood metabolites</div>
+        </div>
+        <span class="badge badge-medium">Moderate Risk</span>
+      </div>
+      <div class="card-body">
+        <p>Trimethylamine-N-oxide (TMAO) is a gut microbiota metabolite produced from choline (eggs, red meat) and carnitine (red meat). Recent research shows TMAO promotes colorectal cancer cell proliferation, invasion, and migration by activating the PI3K/AKT signaling pathway via SREBF1.</p>
+        <div class="tags">
+          <span class="tag">Gut microbiome</span>
+          <span class="tag">PI3K/AKT pathway</span>
+          <span class="tag">CRC proliferation</span>
+        </div>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- HOW IT WORKS -->
+  <h2 class="section-title"><span class="icon">⚙️</span> How These Foods Fuel Cancer</h2>
+  <ul class="mechanism-list">
+    <li>
+      <h4>🔋 Warburg Effect</h4>
+      <p>Cancer cells prefer aerobic glycolysis — consuming massive amounts of glucose and converting it to lactate even with oxygen present, fueling rapid growth.</p>
+    </li>
+    <li>
+      <h4>📈 Insulin &amp; IGF-1 Signaling</h4>
+      <p>High sugar and refined carbs spike insulin and IGF-1, activating PI3K/mTOR pathways that instruct cells to grow and divide — exactly what cancer needs.</p>
+    </li>
+    <li>
+      <h4>🔥 Chronic Inflammation</h4>
+      <p>Processed foods, trans fats, and alcohol generate sustained low-grade inflammation. NF-κB activation promotes tumor survival, angiogenesis, and metastasis.</p>
+    </li>
+    <li>
+      <h4>🧬 DNA Damage</h4>
+      <p>Alcohol metabolites, nitrosamines in processed meat, and HCAs from char-grilled food directly damage DNA, causing the mutations that initiate cancer.</p>
+    </li>
+    <li>
+      <h4>🦠 Gut Microbiome Disruption</h4>
+      <p>Diets low in fiber and high in fat and sugar reduce microbial diversity, depleting short-chain fatty acid producers while enriching pro-carcinogenic species and metabolites like TMAO.</p>
+    </li>
+    <li>
+      <h4>⚖️ Obesity &amp; Adipose Signaling</h4>
+      <p>Excess body fat is a carcinogen factory — adipose tissue secretes inflammatory cytokines, estrogen, and leptin that create a tumor-permissive microenvironment.</p>
+    </li>
+    <li>
+      <h4>🩸 Oxidative Stress</h4>
+      <p>Excessive saturated fats, alcohol, and processed food generate reactive oxygen species that overwhelm antioxidant defenses, damaging DNA, proteins, and cell membranes.</p>
+    </li>
+    <li>
+      <h4>🧪 Epigenetic Changes</h4>
+      <p>Poor diet alters DNA methylation and histone modifications, silencing tumor-suppressor genes and activating oncogenes without changing the underlying DNA sequence.</p>
+    </li>
+  </ul>
+
+  <!-- SOURCES -->
+  <div class="sources">
+    <h3>Scientific Sources (PubMed)</h3>
+    <p style="font-size:.8rem;color:var(--muted);margin-bottom:1rem;">Based on articles retrieved from PubMed. All DOIs link to the original publications.</p>
+    <ol>
+      <li>
+        Camajani E, et al. "Energy metabolism, nutrition and cancer." <em>Seminars in Cancer Biology</em>, 2026.
+        <br><a href="https://doi.org/10.1016/j.semcancer.2026.01.005" target="_blank" rel="noopener">https://doi.org/10.1016/j.semcancer.2026.01.005</a>
+      </li>
+      <li>
+        Ead AS, et al. "Timing-Dependent Effects of ω-3 Fatty Acids on Adipose Tissue and Tumorigenesis in Obesity-Driven Pancreatic Cancer in Mice." <em>The Journal of Nutrition</em>, 2025.
+        <br><a href="https://doi.org/10.1016/j.tjnut.2025.101286" target="_blank" rel="noopener">https://doi.org/10.1016/j.tjnut.2025.101286</a>
+      </li>
+      <li>
+        Yan Y, et al. "The food-derived metabolite trimethylamine and trimethylamine-N-oxide promote colorectal cancer progression via SREBF1." <em>Ecotoxicology and Environmental Safety</em>, 2025.
+        <br><a href="https://doi.org/10.1016/j.ecoenv.2025.118996" target="_blank" rel="noopener">https://doi.org/10.1016/j.ecoenv.2025.118996</a>
+      </li>
+      <li>
+        AlHilli MM, et al. "The effects of dietary fat on gut microbial composition and function in a mouse model of ovarian cancer." <em>Journal of Ovarian Research</em>, 2025.
+        <br><a href="https://doi.org/10.1186/s13048-025-01731-1" target="_blank" rel="noopener">https://doi.org/10.1186/s13048-025-01731-1</a>
+      </li>
+      <li>
+        He J, et al. "Hyodeoxycholic Acid Suppresses High-Fat-Diet-Promoted Colorectal Tumor Growth via Bile Acid Remodeling and Microbiota Modulation." <em>Nutrients</em>, 2025.
+        <br><a href="https://doi.org/10.3390/nu17243939" target="_blank" rel="noopener">https://doi.org/10.3390/nu17243939</a>
+      </li>
+      <li>
+        Luo X, et al. "Dietary monounsaturated fatty acid facilitates lipid droplet turnover through chaperone HSP90A-mediated lysosomal degradation of PLIN2 in hepatocellular carcinoma." <em>Autophagy</em>, 2025.
+        <br><a href="https://doi.org/10.1080/15548627.2025.2579138" target="_blank" rel="noopener">https://doi.org/10.1080/15548627.2025.2579138</a>
+      </li>
+      <li>
+        Arafat HM, et al. "Assessing the Role of Lifestyle in Modulating Serum IGF-1 and Association with Breast Cancer Risk." <em>Asian Pacific Journal of Cancer Prevention</em>, 2026.
+        <br><a href="https://doi.org/10.31557/APJCP.2026.27.1.209" target="_blank" rel="noopener">https://doi.org/10.31557/APJCP.2026.27.1.209</a>
+      </li>
+      <li>
+        Jacoby JL, et al. "Standardizing caloric restriction for preclinical cancer research." <em>BioTechniques</em>, 2025.
+        <br><a href="https://doi.org/10.1080/07366205.2025.2577029" target="_blank" rel="noopener">https://doi.org/10.1080/07366205.2025.2577029</a>
+      </li>
+    </ol>
+    <p class="disclaimer">
+      This page is for educational purposes only and does not constitute medical advice. Cancer is a complex disease influenced by genetics, environment, and many factors beyond diet. Consult a qualified oncologist or registered dietitian for personalized guidance. PubMed attribution required per terms of use.
+    </p>
+  </div>
+
+</main>
+
+</body>
+</html>

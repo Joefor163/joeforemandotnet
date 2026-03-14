@@ -1,0 +1,1241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>What Cancer Feeds On — Tumor Metabolic Fuels</title>
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #080c10;
+      --surface: #0e1318;
+      --card: #111820;
+      --card2: #131b24;
+      --border: #1e2d3a;
+      --blue: #3b82f6;
+      --cyan: #06b6d4;
+      --purple: #a855f7;
+      --amber: #f59e0b;
+      --red: #ef4444;
+      --green: #22c55e;
+      --text: #e2e8f0;
+      --muted: #64748b;
+      --accent: #38bdf8;
+    }
+
+    body {
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    /* ── HERO ── */
+    header {
+      position: relative;
+      overflow: hidden;
+      padding: 4rem 1.5rem 3rem;
+      text-align: center;
+      background: radial-gradient(ellipse 120% 80% at 50% -10%,
+        rgba(6,182,212,.12) 0%, rgba(168,85,247,.08) 40%, transparent 70%);
+      border-bottom: 1px solid var(--border);
+    }
+    header::after {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: url("data:image/svg+xml,%3Csvg width='60' height='60' viewBox='0 0 60 60' xmlns='http://www.w3.org/2000/svg'%3E%3Cg fill='none' fill-rule='evenodd'%3E%3Cg fill='%2306b6d4' fill-opacity='0.03'%3E%3Cpath d='M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z'/%3E%3C/g%3E%3C/g%3E%3C/svg%3E");
+      pointer-events: none;
+    }
+    .hero-label {
+      display: inline-block;
+      font-size: .7rem;
+      font-weight: 700;
+      letter-spacing: .15em;
+      text-transform: uppercase;
+      color: var(--cyan);
+      border: 1px solid rgba(6,182,212,.35);
+      background: rgba(6,182,212,.08);
+      padding: .3rem .9rem;
+      border-radius: 999px;
+      margin-bottom: 1.25rem;
+      position: relative;
+    }
+    header h1 {
+      font-size: clamp(2.2rem, 6vw, 4rem);
+      font-weight: 800;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+      color: #fff;
+      position: relative;
+    }
+    header h1 em {
+      font-style: normal;
+      background: linear-gradient(90deg, var(--cyan), var(--purple));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    header p.sub {
+      margin: 1.1rem auto 0;
+      max-width: 640px;
+      font-size: 1.05rem;
+      color: var(--muted);
+      position: relative;
+    }
+
+    /* ── LAYOUT ── */
+    main { max-width: 1200px; margin: 0 auto; padding: 3rem 1.5rem 5rem; }
+
+    /* ── INTRO CALLOUT ── */
+    .callout {
+      background: linear-gradient(135deg, rgba(6,182,212,.07), rgba(168,85,247,.07));
+      border: 1px solid rgba(6,182,212,.25);
+      border-radius: 14px;
+      padding: 1.75rem 2rem;
+      margin-bottom: 3.5rem;
+      font-size: .975rem;
+      color: #94a3b8;
+      line-height: 1.75;
+    }
+    .callout strong { color: var(--accent); }
+    .callout .warburg {
+      margin-top: 1rem;
+      background: rgba(6,182,212,.06);
+      border-left: 3px solid var(--cyan);
+      border-radius: 0 8px 8px 0;
+      padding: .75rem 1rem;
+      font-size: .9rem;
+      color: #7dd3fc;
+    }
+
+    /* ── SECTION HEADER ── */
+    .sec-head {
+      display: flex;
+      align-items: center;
+      gap: .75rem;
+      margin-bottom: 1.5rem;
+    }
+    .sec-head h2 {
+      font-size: 1.35rem;
+      font-weight: 700;
+      color: #fff;
+    }
+    .sec-head .line {
+      flex: 1;
+      height: 1px;
+      background: var(--border);
+    }
+    .sec-head .dot {
+      width: 10px; height: 10px;
+      border-radius: 50%;
+      flex-shrink: 0;
+    }
+
+    /* ── FUEL GRID ── */
+    .fuel-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 1.25rem;
+      margin-bottom: 3.5rem;
+    }
+
+    /* ── FUEL CARD ── */
+    .fuel-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      overflow: hidden;
+      transition: transform .2s ease, box-shadow .2s ease;
+      display: flex;
+      flex-direction: column;
+    }
+    .fuel-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 12px 40px rgba(0,0,0,.5);
+    }
+    .fuel-card-top {
+      padding: 1.25rem 1.4rem 1rem;
+      border-bottom: 1px solid var(--border);
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+    }
+    .fuel-icon {
+      font-size: 2.4rem;
+      line-height: 1;
+      flex-shrink: 0;
+      margin-top: .1rem;
+    }
+    .fuel-meta { flex: 1 }
+    .fuel-name {
+      font-size: 1.05rem;
+      font-weight: 700;
+      color: #fff;
+      line-height: 1.2;
+    }
+    .fuel-type {
+      font-size: .72rem;
+      font-weight: 600;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      margin-top: .3rem;
+    }
+    .fuel-body { padding: 1.1rem 1.4rem 1.4rem; flex: 1; }
+    .fuel-body p { font-size: .875rem; color: #94a3b8; line-height: 1.7; }
+
+    /* usage bar */
+    .usage-bar-wrap { margin-top: 1rem; }
+    .usage-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: .7rem;
+      color: var(--muted);
+      margin-bottom: .3rem;
+    }
+    .usage-bar {
+      height: 5px;
+      background: #1e2d3a;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .usage-fill {
+      height: 100%;
+      border-radius: 999px;
+      transition: width .6s ease;
+    }
+
+    /* pathway tags */
+    .pathway-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .4rem;
+      margin-top: .9rem;
+    }
+    .ptag {
+      font-size: .68rem;
+      padding: 2px 9px;
+      border-radius: 5px;
+      font-weight: 600;
+      border: 1px solid;
+    }
+
+    /* color themes */
+    .theme-glucose  { border-left: 3px solid #06b6d4; }
+    .theme-glutamine{ border-left: 3px solid #a855f7; }
+    .theme-lipid    { border-left: 3px solid #f59e0b; }
+    .theme-lactate  { border-left: 3px solid #ef4444; }
+    .theme-aa       { border-left: 3px solid #22c55e; }
+    .theme-fructose { border-left: 3px solid #f97316; }
+
+    .c-cyan   { color: #06b6d4; }
+    .c-purple { color: #a855f7; }
+    .c-amber  { color: #f59e0b; }
+    .c-red    { color: #ef4444; }
+    .c-green  { color: #22c55e; }
+    .c-orange { color: #f97316; }
+
+    .fill-cyan   { background: linear-gradient(90deg, #06b6d4, #0e7490); }
+    .fill-purple { background: linear-gradient(90deg, #a855f7, #7c3aed); }
+    .fill-amber  { background: linear-gradient(90deg, #f59e0b, #b45309); }
+    .fill-red    { background: linear-gradient(90deg, #ef4444, #b91c1c); }
+    .fill-green  { background: linear-gradient(90deg, #22c55e, #15803d); }
+    .fill-orange { background: linear-gradient(90deg, #f97316, #c2410c); }
+
+    .ptag-cyan   { border-color: rgba(6,182,212,.4);  color: #06b6d4;  background: rgba(6,182,212,.08); }
+    .ptag-purple { border-color: rgba(168,85,247,.4); color: #c084fc;  background: rgba(168,85,247,.08);}
+    .ptag-amber  { border-color: rgba(245,158,11,.4); color: #fcd34d;  background: rgba(245,158,11,.08);}
+    .ptag-red    { border-color: rgba(239,68,68,.4);  color: #f87171;  background: rgba(239,68,68,.08); }
+    .ptag-green  { border-color: rgba(34,197,94,.4);  color: #4ade80;  background: rgba(34,197,94,.08); }
+    .ptag-orange { border-color: rgba(249,115,22,.4); color: #fb923c;  background: rgba(249,115,22,.08);}
+
+    /* ── METABOLIC MAP ── */
+    .meta-map {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 14px;
+      padding: 2rem;
+      margin-bottom: 3.5rem;
+    }
+    .meta-map h3 {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: 1.5rem;
+      text-align: center;
+    }
+    .flow {
+      display: flex;
+      flex-wrap: wrap;
+      align-items: center;
+      justify-content: center;
+      gap: .5rem;
+    }
+    .flow-node {
+      background: var(--card2);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: .6rem 1rem;
+      font-size: .8rem;
+      font-weight: 600;
+      text-align: center;
+      min-width: 100px;
+    }
+    .flow-arrow {
+      color: var(--muted);
+      font-size: 1.2rem;
+    }
+    .flow-center {
+      background: radial-gradient(circle, rgba(6,182,212,.15), rgba(168,85,247,.1));
+      border: 1px solid rgba(6,182,212,.3);
+      border-radius: 50%;
+      width: 130px;
+      height: 130px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--accent);
+      text-align: center;
+      line-height: 1.3;
+    }
+    .flow-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: .5rem;
+      align-items: center;
+      justify-content: center;
+      width: 100%;
+    }
+
+    /* ── KEY STATS ── */
+    .stats-row {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 1rem;
+      margin-bottom: 3.5rem;
+    }
+    .stat-box {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+      text-align: center;
+    }
+    .stat-num {
+      font-size: 2rem;
+      font-weight: 800;
+      line-height: 1;
+    }
+    .stat-desc {
+      font-size: .75rem;
+      color: var(--muted);
+      margin-top: .4rem;
+      line-height: 1.5;
+    }
+
+    /* ── THERAPEUTIC IMPLICATIONS ── */
+    .implications {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+      gap: 1rem;
+      margin-bottom: 3.5rem;
+    }
+    .implication-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.25rem;
+    }
+    .implication-card h4 {
+      font-size: .9rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: .5rem;
+      display: flex;
+      align-items: center;
+      gap: .5rem;
+    }
+    .implication-card p {
+      font-size: .8rem;
+      color: var(--muted);
+      line-height: 1.6;
+    }
+
+    /* ── SOURCES ── */
+    .sources {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      padding: 1.75rem;
+    }
+    .sources h3 {
+      font-size: 1.2rem;
+      font-weight: 700;
+      color: #fff;
+      margin-bottom: .5rem;
+    }
+    .sources .pubmed-attr {
+      font-size: .75rem;
+      color: var(--cyan);
+      margin-bottom: 1.5rem;
+      display: flex;
+      align-items: center;
+      gap: .35rem;
+    }
+    .sources a { color: #38bdf8; text-decoration: none; }
+    .sources a:hover { text-decoration: underline; }
+    .disclaimer {
+      margin-top: 1.5rem;
+      font-size: .72rem;
+      color: #334155;
+      border-top: 1px solid var(--border);
+      padding-top: 1rem;
+    }
+
+    /* reference cards */
+    .ref-list { display: flex; flex-direction: column; gap: 1.25rem; }
+    .ref-card {
+      background: var(--card);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+    }
+    .ref-card-head {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 1.25rem;
+      border-bottom: 1px solid var(--border);
+      cursor: pointer;
+      user-select: none;
+    }
+    .ref-card-head:hover { background: rgba(255,255,255,.02); }
+    .ref-num {
+      flex-shrink: 0;
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      background: rgba(6,182,212,.15);
+      border: 1px solid rgba(6,182,212,.35);
+      color: var(--cyan);
+      font-size: .75rem;
+      font-weight: 700;
+      display: flex; align-items: center; justify-content: center;
+    }
+    .ref-title-block { flex: 1; }
+    .ref-title {
+      font-size: .9rem;
+      font-weight: 600;
+      color: #e2e8f0;
+      line-height: 1.4;
+    }
+    .ref-meta {
+      font-size: .72rem;
+      color: var(--muted);
+      margin-top: .25rem;
+    }
+    .ref-toggle {
+      flex-shrink: 0;
+      color: var(--muted);
+      font-size: .8rem;
+      margin-top: .15rem;
+      transition: transform .2s;
+    }
+    .ref-card-body {
+      padding: 1.1rem 1.25rem 1.25rem;
+    }
+    .ref-section-label {
+      font-size: .65rem;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: .4rem;
+      margin-top: .85rem;
+    }
+    .ref-section-label:first-child { margin-top: 0; }
+    .ref-summary {
+      font-size: .83rem;
+      color: #94a3b8;
+      line-height: 1.7;
+    }
+    .claim-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: .4rem;
+      margin-top: .1rem;
+    }
+    .claim-list li {
+      display: flex;
+      align-items: baseline;
+      gap: .5rem;
+      font-size: .8rem;
+      color: #94a3b8;
+      line-height: 1.55;
+    }
+    .claim-list li::before {
+      content: '▸';
+      color: var(--cyan);
+      flex-shrink: 0;
+      font-size: .7rem;
+    }
+    .ref-access {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      margin-top: .9rem;
+      background: rgba(6,182,212,.1);
+      border: 1px solid rgba(6,182,212,.3);
+      border-radius: 8px;
+      padding: .45rem 1rem;
+      font-size: .78rem;
+      font-weight: 600;
+      color: var(--cyan);
+      text-decoration: none;
+      transition: background .2s, border-color .2s;
+    }
+    .ref-access:hover {
+      background: rgba(6,182,212,.2);
+      border-color: rgba(6,182,212,.5);
+      text-decoration: none;
+    }
+    .pmid-badge {
+      display: inline-block;
+      font-size: .68rem;
+      background: rgba(255,255,255,.05);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 1px 7px;
+      color: var(--muted);
+      margin-left: .4rem;
+    }
+    .open-access-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: .25rem;
+      font-size: .65rem;
+      background: rgba(34,197,94,.08);
+      border: 1px solid rgba(34,197,94,.25);
+      border-radius: 4px;
+      padding: 1px 7px;
+      color: #4ade80;
+      margin-left: .4rem;
+    }
+
+    @media (max-width: 600px) {
+      .fuel-grid { grid-template-columns: 1fr; }
+      .stats-row { grid-template-columns: 1fr 1fr; }
+      .flow-center { width: 100px; height: 100px; font-size: .72rem; }
+    }
+
+    /* ── FUEL → REF LINK BUTTON ── */
+    .see-refs-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: .4rem;
+      margin-top: 1rem;
+      padding: .4rem .95rem;
+      font-size: .75rem;
+      font-weight: 700;
+      letter-spacing: .03em;
+      border-radius: 7px;
+      border: 1px solid rgba(255,255,255,.1);
+      background: rgba(255,255,255,.04);
+      color: #94a3b8;
+      cursor: pointer;
+      transition: background .18s, border-color .18s, color .18s;
+      text-decoration: none;
+    }
+    .see-refs-btn:hover {
+      background: rgba(255,255,255,.09);
+      border-color: rgba(255,255,255,.2);
+      color: #e2e8f0;
+    }
+    .see-refs-btn .ref-pills {
+      display: inline-flex;
+      gap: .25rem;
+    }
+    .see-refs-btn .rpill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 18px; height: 18px;
+      border-radius: 50%;
+      font-size: .65rem;
+      font-weight: 800;
+    }
+
+    /* highlight flash animation on ref cards */
+    @keyframes refFlash {
+      0%   { box-shadow: 0 0 0 0 rgba(6,182,212,0); background: var(--card); }
+      20%  { box-shadow: 0 0 0 4px rgba(6,182,212,.5); background: rgba(6,182,212,.08); }
+      60%  { box-shadow: 0 0 0 4px rgba(6,182,212,.3); background: rgba(6,182,212,.05); }
+      100% { box-shadow: 0 0 0 0 rgba(6,182,212,0); background: var(--card); }
+    }
+    .ref-card.flash {
+      animation: refFlash 1.6s ease forwards;
+    }
+
+    /* inline claim highlight inside ref body */
+    .claim-list li.active-claim {
+      color: #e2e8f0;
+      background: rgba(6,182,212,.07);
+      border-radius: 5px;
+      padding: 2px 6px;
+      margin: 0 -6px;
+    }
+    .claim-list li.active-claim::before { color: #38bdf8; }
+  </style>
+</head>
+<body>
+
+<nav style="position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;height:52px;padding:0 24px;background:rgba(8,12,16,0.9);backdrop-filter:blur(10px);border-bottom:1px solid #1e2d3a;font-family:'Segoe UI',system-ui,sans-serif;">
+  <a href="/cancer-ai/" style="color:#64748b;font-size:0.88rem;text-decoration:none;">← Cancer &amp; AI</a>
+  <a href="/" style="color:#64748b;font-size:0.88rem;text-decoration:none;">Joe Foreman</a>
+</nav>
+
+<header>
+  <div class="hero-label">Tumor Biochemistry &amp; Metabolic Oncology</div>
+  <h1>What Cancer <em>Feeds On</em></h1>
+  <p class="sub">The molecular fuels that power tumor survival, proliferation, and immune evasion — grounded in current cancer metabolism research.</p>
+</header>
+
+<main>
+
+  <!-- INTRO -->
+  <div class="callout">
+    Cancer is not just a genetic disease — it is a <strong>metabolic disease</strong>. Tumor cells undergo profound metabolic reprogramming, rewiring how they import and consume nutrients to sustain unlimited growth. Unlike normal cells, cancer cells are extraordinarily hungry and highly adaptable, capable of exploiting multiple fuel sources simultaneously: sugar, amino acids, fats, and even the waste products of their own metabolism.
+    <div class="warburg">
+      ⚡ <strong>The Warburg Effect</strong> — first described by Otto Warburg in 1924 — is the hallmark observation that cancer cells preferentially convert glucose to lactate even in the presence of oxygen (aerobic glycolysis), consuming glucose at up to <strong>200× the rate</strong> of resting normal cells. This inefficient but rapid ATP-generation strategy, combined with biosynthetic advantages, is central to tumor growth.
+    </div>
+  </div>
+
+  <!-- STATS -->
+  <div class="stats-row">
+    <div class="stat-box">
+      <div class="stat-num c-cyan">~200×</div>
+      <div class="stat-desc">more glucose consumed by tumor cells vs. resting normal cells</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num c-purple">35%</div>
+      <div class="stat-desc">of tumor dry mass can be derived from glutamine carbon</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num c-amber">80%+</div>
+      <div class="stat-desc">of cancers upregulate de novo fatty acid synthesis (FASN)</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num c-red">↑25×</div>
+      <div class="stat-desc">lactate produced by tumors acidifies the microenvironment, suppressing immune cells</div>
+    </div>
+    <div class="stat-box">
+      <div class="stat-num c-green">4</div>
+      <div class="stat-desc">primary oncogenes (MYC, KRAS, HIF-1α, p53) directly regulate glutamine metabolism</div>
+    </div>
+  </div>
+
+  <!-- PRIMARY FUELS -->
+  <div class="sec-head">
+    <div class="dot" style="background:var(--cyan)"></div>
+    <h2>Primary Metabolic Fuels</h2>
+    <div class="line"></div>
+  </div>
+  <div class="fuel-grid">
+
+    <!-- GLUCOSE -->
+    <div class="fuel-card theme-glucose" id="fuel-glucose">
+      <div class="fuel-card-top">
+        <div class="fuel-icon">🍬</div>
+        <div class="fuel-meta">
+          <div class="fuel-name">Glucose</div>
+          <div class="fuel-type c-cyan">Cancer's #1 Preferred Fuel</div>
+        </div>
+      </div>
+      <div class="fuel-body">
+        <p>Glucose is the primary energy currency of cancer. Tumor cells overexpress glucose transporters (GLUT1, GLUT3) and glycolytic enzymes (HK2, PKM2, LDH-A), allowing them to pull glucose from the bloodstream at extraordinary rates. They ferment it to lactate even with plenty of oxygen available — not just for ATP, but to generate the biosynthetic building blocks (ribose-5-phosphate, NADPH, acetyl-CoA) needed for explosive growth.</p>
+        <div class="usage-bar-wrap">
+          <div class="usage-label"><span>Tumor Dependence</span><span>Extremely High</span></div>
+          <div class="usage-bar"><div class="usage-fill fill-cyan" style="width:98%"></div></div>
+        </div>
+        <div class="pathway-tags">
+          <span class="ptag ptag-cyan">Aerobic Glycolysis</span>
+          <span class="ptag ptag-cyan">Pentose Phosphate Pathway</span>
+          <span class="ptag ptag-cyan">GLUT1/GLUT3 Overexpression</span>
+          <span class="ptag ptag-cyan">HK2 / PKM2 / LDH-A</span>
+          <span class="ptag ptag-cyan">PI3K/AKT/mTOR</span>
+        </div>
+        <button class="see-refs-btn" onclick="jumpToRefs('glucose')" title="Jump to supporting references">
+          📖 See in References
+          <span class="ref-pills">
+            <span class="rpill" style="background:rgba(6,182,212,.25);color:#06b6d4">1</span>
+            <span class="rpill" style="background:rgba(6,182,212,.25);color:#06b6d4">3</span>
+            <span class="rpill" style="background:rgba(6,182,212,.25);color:#06b6d4">5</span>
+            <span class="rpill" style="background:rgba(6,182,212,.25);color:#06b6d4">6</span>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- GLUTAMINE -->
+    <div class="fuel-card theme-glutamine" id="fuel-glutamine">
+      <div class="fuel-card-top">
+        <div class="fuel-icon">🧬</div>
+        <div class="fuel-meta">
+          <div class="fuel-name">Glutamine</div>
+          <div class="fuel-type c-purple">The "Second Fuel" — Cancer is Addicted</div>
+        </div>
+      </div>
+      <div class="fuel-body">
+        <p>Glutamine is the most abundant amino acid in blood and the second most critical fuel for cancer. Tumor cells consume it voraciously (glutamine addiction) via glutaminolysis — converting it to α-ketoglutarate to feed the TCA cycle, generate ATP, and produce amino acids, nucleotides, and fatty acids. Oncogenes MYC, KRAS, and HIF-1α directly upregulate glutamine uptake. In glucose-deprived conditions, glutamine becomes the primary survival fuel.</p>
+        <div class="usage-bar-wrap">
+          <div class="usage-label"><span>Tumor Dependence</span><span>Very High</span></div>
+          <div class="usage-bar"><div class="usage-fill fill-purple" style="width:88%"></div></div>
+        </div>
+        <div class="pathway-tags">
+          <span class="ptag ptag-purple">Glutaminolysis</span>
+          <span class="ptag ptag-purple">TCA Cycle Anaplerosis</span>
+          <span class="ptag ptag-purple">GLS1/GLS2 Enzymes</span>
+          <span class="ptag ptag-purple">MYC / KRAS / HIF-1α</span>
+          <span class="ptag ptag-purple">mTORC1 Activation</span>
+        </div>
+        <button class="see-refs-btn" onclick="jumpToRefs('glutamine')" title="Jump to supporting references">
+          📖 See in References
+          <span class="ref-pills">
+            <span class="rpill" style="background:rgba(168,85,247,.25);color:#c084fc">1</span>
+            <span class="rpill" style="background:rgba(168,85,247,.25);color:#c084fc">2</span>
+            <span class="rpill" style="background:rgba(168,85,247,.25);color:#c084fc">3</span>
+            <span class="rpill" style="background:rgba(168,85,247,.25);color:#c084fc">4</span>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- FATTY ACIDS & LIPIDS -->
+    <div class="fuel-card theme-lipid" id="fuel-lipid">
+      <div class="fuel-card-top">
+        <div class="fuel-icon">🧈</div>
+        <div class="fuel-meta">
+          <div class="fuel-name">Fatty Acids &amp; Lipids</div>
+          <div class="fuel-type c-amber">De Novo Synthesis &amp; Oxidation</div>
+        </div>
+      </div>
+      <div class="fuel-body">
+        <p>Over 80% of cancers dramatically upregulate de novo lipogenesis — synthesizing fatty acids from scratch even when dietary fat is available. Fatty acid synthase (FASN) is a key oncogenic enzyme. Lipids serve triple duty: energy via β-oxidation, structural material for rapidly dividing cell membranes, and signaling molecules that activate growth pathways. Cancers also scavenge lipids from the tumor microenvironment, including adipocyte-derived fatty acids.</p>
+        <div class="usage-bar-wrap">
+          <div class="usage-label"><span>Tumor Dependence</span><span>High</span></div>
+          <div class="usage-bar"><div class="usage-fill fill-amber" style="width:82%"></div></div>
+        </div>
+        <div class="pathway-tags">
+          <span class="ptag ptag-amber">De Novo Lipogenesis</span>
+          <span class="ptag ptag-amber">Fatty Acid Oxidation (FAO)</span>
+          <span class="ptag ptag-amber">FASN / ACSL3 / SREBP</span>
+          <span class="ptag ptag-amber">Membrane Biosynthesis</span>
+          <span class="ptag ptag-amber">PPAR Signaling</span>
+        </div>
+        <button class="see-refs-btn" onclick="jumpToRefs('lipid')" title="Jump to supporting references">
+          📖 See in References
+          <span class="ref-pills">
+            <span class="rpill" style="background:rgba(245,158,11,.25);color:#fcd34d">6</span>
+            <span class="rpill" style="background:rgba(245,158,11,.25);color:#fcd34d">7</span>
+            <span class="rpill" style="background:rgba(245,158,11,.25);color:#fcd34d">8</span>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- LACTATE -->
+    <div class="fuel-card theme-lactate" id="fuel-lactate">
+      <div class="fuel-card-top">
+        <div class="fuel-icon">⚡</div>
+        <div class="fuel-meta">
+          <div class="fuel-name">Lactate</div>
+          <div class="fuel-type c-red">Cancer's Own Waste — Recycled as Fuel</div>
+        </div>
+      </div>
+      <div class="fuel-body">
+        <p>In a remarkable metabolic symbiosis, some cancer cells produce lactate via glycolysis, while neighboring cancer cells (or cancer-associated fibroblasts) import and burn that lactate as fuel via the TCA cycle. This "lactate shuttle" lets hypoxic tumor cells share metabolic work with oxygenated ones. Lactate also acidifies the tumor microenvironment, suppressing immune cells and enabling invasion — and it modifies gene expression through histone lactylation, reshaping tumor biology at the epigenetic level.</p>
+        <div class="usage-bar-wrap">
+          <div class="usage-label"><span>Tumor Dependence</span><span>High (recycled fuel)</span></div>
+          <div class="usage-bar"><div class="usage-fill fill-red" style="width:75%"></div></div>
+        </div>
+        <div class="pathway-tags">
+          <span class="ptag ptag-red">Reverse Warburg Effect</span>
+          <span class="ptag ptag-red">Lactate Shuttle (MCT1/MCT4)</span>
+          <span class="ptag ptag-red">Histone Lactylation</span>
+          <span class="ptag ptag-red">Immune Suppression</span>
+          <span class="ptag ptag-red">Tumor Acidification</span>
+        </div>
+        <button class="see-refs-btn" onclick="jumpToRefs('lactate')" title="Jump to supporting references">
+          📖 See in References
+          <span class="ref-pills">
+            <span class="rpill" style="background:rgba(239,68,68,.25);color:#f87171">1</span>
+            <span class="rpill" style="background:rgba(239,68,68,.25);color:#f87171">3</span>
+            <span class="rpill" style="background:rgba(239,68,68,.25);color:#f87171">5</span>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- OTHER AMINO ACIDS -->
+    <div class="fuel-card theme-aa" id="fuel-aminoacids">
+      <div class="fuel-card-top">
+        <div class="fuel-icon">🔬</div>
+        <div class="fuel-meta">
+          <div class="fuel-name">Other Amino Acids</div>
+          <div class="fuel-type c-green">Serine, Arginine, Asparagine &amp; More</div>
+        </div>
+      </div>
+      <div class="fuel-body">
+        <p>Beyond glutamine, several amino acids serve as critical tumor fuels. <strong>Serine</strong> feeds one-carbon metabolism (methyl group production for DNA/RNA synthesis and epigenetic modifications). <strong>Arginine</strong> fuels certain cancers that lose the enzyme ASS1. <strong>Asparagine</strong> regulates amino acid sensing and mTORC1 signaling. <strong>Cysteine</strong> is critical for glutathione production and antioxidant defense. Cancer cells upregulate specific amino acid transporters (SLC1A5/ASCT2, LAT1) to maximize uptake.</p>
+        <div class="usage-bar-wrap">
+          <div class="usage-label"><span>Tumor Dependence</span><span>Moderate–High</span></div>
+          <div class="usage-bar"><div class="usage-fill fill-green" style="width:70%"></div></div>
+        </div>
+        <div class="pathway-tags">
+          <span class="ptag ptag-green">One-Carbon Metabolism</span>
+          <span class="ptag ptag-green">SLC1A5 / LAT1 Transporters</span>
+          <span class="ptag ptag-green">Redox Balance</span>
+          <span class="ptag ptag-green">Nucleotide Synthesis</span>
+          <span class="ptag ptag-green">mTORC1 Sensing</span>
+        </div>
+        <button class="see-refs-btn" onclick="jumpToRefs('aminoacids')" title="Jump to supporting references">
+          📖 See in References
+          <span class="ref-pills">
+            <span class="rpill" style="background:rgba(34,197,94,.25);color:#4ade80">1</span>
+            <span class="rpill" style="background:rgba(34,197,94,.25);color:#4ade80">6</span>
+          </span>
+        </button>
+      </div>
+    </div>
+
+    <!-- FRUCTOSE -->
+    <div class="fuel-card theme-fructose" id="fuel-fructose">
+      <div class="fuel-card-top">
+        <div class="fuel-icon">🍎</div>
+        <div class="fuel-meta">
+          <div class="fuel-name">Fructose</div>
+          <div class="fuel-type c-orange">An Underappreciated Alternative Fuel</div>
+        </div>
+      </div>
+      <div class="fuel-body">
+        <p>Fructose is metabolized differently from glucose — bypassing the key regulatory enzyme PFK1 — meaning it floods into the cell's biosynthetic machinery without the normal brakes. Certain cancers (colorectal, hepatocellular, pancreatic) overexpress the fructose transporter GLUT5 and metabolize fructose via the polyol pathway and ketohexokinase (KHK), feeding lipogenesis and nucleotide synthesis. Fructose also stimulates uric acid production, which promotes inflammation and tumor survival.</p>
+        <div class="usage-bar-wrap">
+          <div class="usage-label"><span>Tumor Dependence</span><span>Moderate</span></div>
+          <div class="usage-bar"><div class="usage-fill fill-orange" style="width:58%"></div></div>
+        </div>
+        <div class="pathway-tags">
+          <span class="ptag ptag-orange">GLUT5 Transporter</span>
+          <span class="ptag ptag-orange">Ketohexokinase (KHK)</span>
+          <span class="ptag ptag-orange">Polyol Pathway</span>
+          <span class="ptag ptag-orange">Lipogenesis Feed</span>
+          <span class="ptag ptag-orange">Uric Acid / Inflammation</span>
+        </div>
+        <button class="see-refs-btn" onclick="jumpToRefs('fructose')" title="Jump to supporting references">
+          📖 See in References
+          <span class="ref-pills">
+            <span class="rpill" style="background:rgba(249,115,22,.25);color:#fb923c">1</span>
+            <span class="rpill" style="background:rgba(249,115,22,.25);color:#fb923c">7</span>
+          </span>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- METABOLIC FLOW DIAGRAM -->
+  <div class="meta-map">
+    <h3>🔄 How These Fuels Flow Into the Cancer Cell</h3>
+    <div class="flow">
+      <div class="flow-row">
+        <div class="flow-node" style="border-color:rgba(6,182,212,.4); color:#06b6d4">🍬 Glucose<br><small style="color:#64748b">GLUT1/3</small></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node" style="border-color:rgba(6,182,212,.4); color:#7dd3fc">Glycolysis<br><small style="color:#64748b">HK2 → PFK → PKM2</small></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node" style="border-color:rgba(239,68,68,.4); color:#f87171">Lactate<br><small style="color:#64748b">LDH-A → MCT4</small></div>
+      </div>
+      <div class="flow-row" style="margin-top:1rem">
+        <div class="flow-node" style="border-color:rgba(168,85,247,.4); color:#c084fc">🧬 Glutamine<br><small style="color:#64748b">SLC1A5/ASCT2</small></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-center">TUMOR CELL<br>Metabolic Hub<br><small style="color:#64748b; font-weight:400">TCA / ATP / Biosynthesis</small></div>
+        <div class="flow-arrow">←</div>
+        <div class="flow-node" style="border-color:rgba(245,158,11,.4); color:#fcd34d">🧈 Fatty Acids<br><small style="color:#64748b">FASN / FAO</small></div>
+      </div>
+      <div class="flow-row" style="margin-top:1rem">
+        <div class="flow-node" style="border-color:rgba(34,197,94,.4); color:#4ade80">🔬 Amino Acids<br><small style="color:#64748b">LAT1 / various</small></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node" style="border-color:rgba(249,115,22,.4); color:#fb923c">🍎 Fructose<br><small style="color:#64748b">GLUT5 / KHK</small></div>
+        <div class="flow-arrow">→</div>
+        <div class="flow-node" style="border-color:rgba(239,68,68,.4); color:#f87171">♻️ Lactate Recycled<br><small style="color:#64748b">MCT1 (import)</small></div>
+      </div>
+      <div class="flow-row" style="margin-top:1rem; font-size:.75rem; color:var(--muted); text-align:center; width:100%">
+        ↓ Outputs: ATP · Ribose-5P · NADPH · Acetyl-CoA · Amino Acids · Nucleotides · Membrane Lipids · Epigenetic Signals
+      </div>
+    </div>
+  </div>
+
+  <!-- THERAPEUTIC IMPLICATIONS -->
+  <div class="sec-head">
+    <div class="dot" style="background:var(--green)"></div>
+    <h2>Therapeutic Implications</h2>
+    <div class="line"></div>
+  </div>
+  <div class="implications" style="margin-bottom:3.5rem">
+    <div class="implication-card">
+      <h4><span>🎯</span> Starve the Glucose Supply</h4>
+      <p>2-Deoxy-D-glucose (2-DG) and GLUT1 inhibitors (e.g., BAY-876) are in clinical trials to block glucose uptake. Ketogenic diets reduce blood glucose and insulin, starving glucose-dependent tumors in several cancer models.</p>
+    </div>
+    <div class="implication-card">
+      <h4><span>🧪</span> Block Glutaminolysis</h4>
+      <p>CB-839 (telaglenastat), a GLS1 inhibitor, is in phase 2 trials. Glutamine deprivation is particularly effective in MYC-amplified or KRAS-mutant cancers that are highly glutamine-addicted.</p>
+    </div>
+    <div class="implication-card">
+      <h4><span>💊</span> Inhibit Lipid Synthesis</h4>
+      <p>FASN inhibitors (TVB-2640), statins, and ACC inhibitors target the de novo lipogenesis pathway. ACSL3, upregulated in hepatocellular carcinoma, is an emerging target bridging lipid metabolism and immune evasion.</p>
+    </div>
+    <div class="implication-card">
+      <h4><span>🚧</span> Disrupt Lactate Shuttles</h4>
+      <p>MCT1/MCT4 inhibitors (e.g., AZD3965) block lactate transport, breaking the metabolic symbiosis between glycolytic and oxidative cancer cells. This also reduces immunosuppression in the tumor microenvironment.</p>
+    </div>
+    <div class="implication-card">
+      <h4><span>🍽️</span> Dietary Metabolic Strategies</h4>
+      <p>Caloric restriction and intermittent fasting reduce IGF-1, insulin, and blood glucose, slowing tumor growth in multiple preclinical models. These approaches are being evaluated as adjuncts to chemotherapy.</p>
+    </div>
+    <div class="implication-card">
+      <h4><span>🔬</span> PET Imaging Exploits This</h4>
+      <p>FDG-PET scans work precisely because cancer cells consume far more glucose than surrounding tissue — radioactive glucose (18F-FDG) lights up tumors. This is direct clinical proof of the Warburg effect.</p>
+    </div>
+  </div>
+
+  <!-- SOURCES -->
+  <div class="sources">
+    <h3>📚 Scientific References — Summaries &amp; Access</h3>
+    <div class="pubmed-attr">📖 All articles retrieved from PubMed · National Library of Medicine · Proper attribution required per terms of use</div>
+
+    <div class="ref-list">
+
+      <!-- REF 1 -->
+      <div class="ref-card" id="ref-1" data-fuels="glucose,glutamine,lactate,aminoacids,fructose">
+        <div class="ref-card-head">
+          <div class="ref-num">1</div>
+          <div class="ref-title-block">
+            <div class="ref-title">Metabolic Signature of Warburg Effect in Cancer: An Effective and Obligatory Interplay between Nutrient Transporters and Catabolic/Anabolic Pathways to Promote Tumor Growth</div>
+            <div class="ref-meta">Mathew M, Nguyen NT, Bhutia YD, Sivaprakasam S, Ganapathy V · <em>Cancers (Basel)</em>, 2024; 16(3) · PMID: 38339256 <span class="open-access-badge">✓ Open Access · PMC10854907</span></div>
+          </div>
+        </div>
+        <div class="ref-card-body">
+          <div class="ref-section-label">Summary</div>
+          <div class="ref-summary">This comprehensive review from Texas Tech University Health Sciences Center examines how cancer cells go far beyond the classic Warburg effect. The authors detail how aerobic glycolysis — fermenting glucose to lactate even with oxygen present — is just the entry point. Cancer cells reprogram an entire network of interlinked pathways: amino acid metabolism, one-carbon metabolism, the pentose phosphate pathway (for nucleotide synthesis), and antioxidant machinery. Crucially, the review focuses on the <strong>nutrient transporters</strong> — the molecular "intake valves" on cell membranes — that make all of this possible, spanning plasma membrane, mitochondrial, and lysosomal transporters. These transporters are identified as novel drug targets for next-generation cancer therapeutics.</div>
+          <div class="ref-section-label">Key Claims Supported</div>
+          <ul class="claim-list">
+            <li data-fuel="glucose,lactate">Cancer cells produce lactate from glucose even when oxygen is plentiful (aerobic glycolysis / Warburg effect)</li>
+            <li data-fuel="glucose,aminoacids,fructose">Glucose and amino acids are the primary nutrients fueling cancer's altered metabolic pathways</li>
+            <li data-fuel="glucose,glutamine,aminoacids">Nutrient transporters (GLUT1, ASCT2, LAT1, etc.) are essential and upregulated components of cancer metabolism</li>
+            <li data-fuel="glucose,aminoacids">Metabolic reprogramming extends to the pentose phosphate pathway, one-carbon metabolism, and antioxidant machinery</li>
+            <li data-fuel="glucose,glutamine,lactate,aminoacids,fructose">These transporters and pathways represent novel therapeutic drug targets</li>
+          </ul>
+          <a class="ref-access" href="https://doi.org/10.3390/cancers16030504" target="_blank" rel="noopener">
+            🔓 Read Full Article (Open Access) · doi:10.3390/cancers16030504
+          </a>
+          &nbsp;
+          <a class="ref-access" href="https://pubmed.ncbi.nlm.nih.gov/38339256/" target="_blank" rel="noopener" style="border-color:rgba(100,116,139,.35);color:#94a3b8;background:rgba(100,116,139,.08)">
+            PubMed Record
+          </a>
+        </div>
+      </div>
+
+      <!-- REF 2 -->
+      <div class="ref-card" id="ref-2" data-fuels="glutamine">
+        <div class="ref-card-head">
+          <div class="ref-num">2</div>
+          <div class="ref-title-block">
+            <div class="ref-title">Glutamine Addiction in Tumor Cell: Oncogene Regulation and Clinical Treatment</div>
+            <div class="ref-meta">Li X, Peng X, Li Y, et al. · <em>Cell Communication and Signaling</em>, 2024; 22(1):12 · PMID: 38172980 <span class="open-access-badge">✓ Open Access · PMC10763057</span></div>
+          </div>
+        </div>
+        <div class="ref-card-body">
+          <div class="ref-section-label">Summary</div>
+          <div class="ref-summary">Researchers at China Medical University's Fourth Affiliated Hospital provide a deep dive into cancer's "glutamine addiction." After metabolic reprogramming, tumor cells consume glutamine at vastly increased rates to generate the building blocks of life: amino acids, nucleotides, fatty acids, and more — all essential for unlimited proliferation. The paper maps out how glutamine is imported, metabolized, and transported, then explains how major oncogenes (C-MYC, KRAS, HIF, and p53) directly control glutamine metabolism. The review also surveys clinical anti-cancer agents that target glutamine pathways, including CB-839 (telaglenastat), and assesses their prospects.</div>
+          <div class="ref-section-label">Key Claims Supported</div>
+          <ul class="claim-list">
+            <li data-fuel="glutamine">Cancer cells are "addicted" to glutamine, consuming it far beyond normal cellular needs</li>
+            <li data-fuel="glutamine,lipid">Glutamine feeds synthesis of amino acids, fatty acids, and nucleotides essential for tumor proliferation</li>
+            <li data-fuel="glutamine">Oncogenes C-MYC, KRAS, HIF-1α, and p53 directly regulate glutamine uptake and metabolism</li>
+            <li data-fuel="glutamine">Glutamine triggers mTORC1 activation — a key growth signaling hub</li>
+            <li data-fuel="glutamine">Glutaminase inhibitors (e.g., CB-839) are clinically relevant anti-tumor agents</li>
+          </ul>
+          <a class="ref-access" href="https://doi.org/10.1186/s12964-023-01449-x" target="_blank" rel="noopener">
+            🔓 Read Full Article (Open Access) · doi:10.1186/s12964-023-01449-x
+          </a>
+          &nbsp;
+          <a class="ref-access" href="https://pubmed.ncbi.nlm.nih.gov/38172980/" target="_blank" rel="noopener" style="border-color:rgba(100,116,139,.35);color:#94a3b8;background:rgba(100,116,139,.08)">
+            PubMed Record
+          </a>
+        </div>
+      </div>
+
+      <!-- REF 3 -->
+      <div class="ref-card" id="ref-3" data-fuels="glucose,glutamine,lactate">
+        <div class="ref-card-head">
+          <div class="ref-num">3</div>
+          <div class="ref-title-block">
+            <div class="ref-title">Immunological Aspects of Cancer Cell Metabolism</div>
+            <div class="ref-meta">Ucche S, Hayakawa Y · <em>International Journal of Molecular Sciences</em>, 2024; 25(10) · PMID: 38791327 <span class="open-access-badge">✓ Open Access · PMC11120853</span></div>
+          </div>
+        </div>
+        <div class="ref-card-body">
+          <div class="ref-section-label">Summary</div>
+          <div class="ref-summary">From the University of Toyama (Japan), this review explores the critical and underappreciated link between cancer metabolism and immune evasion. Cancer cells don't just use metabolic fuels to grow — they weaponize metabolism to escape immune destruction. By accelerating glucose and amino acid consumption, tumors create a nutrient-depleted, acidic, lactate-flooded microenvironment that paralyzes T cells, NK cells, and macrophages. The authors focus on how the Warburg effect and glutamine addiction create an immunosuppressive "metabolic force field" around tumors, and propose that disrupting these metabolic pathways could directly enhance immunotherapy effectiveness.</div>
+          <div class="ref-section-label">Key Claims Supported</div>
+          <ul class="claim-list">
+            <li data-fuel="glucose,glutamine,lactate">Cancer cells manipulate their metabolism to actively evade immune detection</li>
+            <li data-fuel="glucose,glutamine">Tumor metabolic reprogramming accelerates glucose and amino acid consumption to outcompete immune cells</li>
+            <li data-fuel="glucose,glutamine,lactate">The Warburg effect and glutamine addiction generate an immunosuppressive tumor microenvironment (TME)</li>
+            <li data-fuel="lactate,glucose">Lactate produced by glycolysis suppresses immune cell function and promotes tumor immune evasion</li>
+            <li data-fuel="glucose,glutamine,lactate">Disrupting cancer metabolic pathways (Warburg + glutaminolysis) is a viable immunotherapy enhancement strategy</li>
+          </ul>
+          <a class="ref-access" href="https://doi.org/10.3390/ijms25105288" target="_blank" rel="noopener">
+            🔓 Read Full Article (Open Access) · doi:10.3390/ijms25105288
+          </a>
+          &nbsp;
+          <a class="ref-access" href="https://pubmed.ncbi.nlm.nih.gov/38791327/" target="_blank" rel="noopener" style="border-color:rgba(100,116,139,.35);color:#94a3b8;background:rgba(100,116,139,.08)">
+            PubMed Record
+          </a>
+        </div>
+      </div>
+
+      <!-- REF 4 -->
+      <div class="ref-card" id="ref-4" data-fuels="glutamine">
+        <div class="ref-card-head">
+          <div class="ref-num">4</div>
+          <div class="ref-title-block">
+            <div class="ref-title">Splicing Factor SF3B4 Promotes Mitochondrial Glutamine Metabolism in Hepatocellular Carcinoma by Regulating GLS1 Isoform Switching</div>
+            <div class="ref-meta">Yang S, Ko M, Zhang W, Jeong SM · <em>Biochemical &amp; Biophysical Research Communications</em>, 2025; 796:153134 · PMID: 41411906</div>
+          </div>
+        </div>
+        <div class="ref-card-body">
+          <div class="ref-section-label">Summary</div>
+          <div class="ref-summary">Scientists at The Catholic University of Korea uncovered a previously unknown molecular mechanism driving glutamine addiction in liver cancer (HCC). The splicing factor SF3B4 — highly expressed in HCC — controls which version (isoform) of the key glutaminase enzyme GLS1 the cell produces. SF3B4 preferentially generates the GAC isoform of GLS1, which has significantly higher catalytic activity than the KGA isoform. This is a "metabolic tuning" mechanism: the cancer doesn't just increase glutaminase quantity, it switches to a more powerful enzyme variant. When SF3B4 is blocked, glutaminolysis drops, mitochondrial respiration on glutamine decreases, and tumor cells — especially when glucose is scarce — struggle to survive, revealing SF3B4 as a potential drug target.</div>
+          <div class="ref-section-label">Key Claims Supported</div>
+          <ul class="claim-list">
+            <li data-fuel="glutamine">Glutamine metabolism is markedly upregulated in hepatocellular carcinoma (HCC) and essential for tumor growth</li>
+            <li data-fuel="glutamine">Cancer cells don't just express more glutaminase — they switch to a higher-activity enzyme isoform (GAC over KGA)</li>
+            <li data-fuel="glutamine">SF3B4 is overexpressed in HCC and is essential for tumor cell proliferation, migration, and colony formation</li>
+            <li data-fuel="glutamine,glucose">Under glucose deprivation, glutamine becomes the primary survival fuel (SF3B4-dependent)</li>
+            <li data-fuel="glutamine">The SF3B4–GAC axis is a new therapeutic target in glutamine-addicted liver cancers</li>
+          </ul>
+          <a class="ref-access" href="https://doi.org/10.1016/j.bbrc.2025.153134" target="_blank" rel="noopener">
+            🔗 Access Article · doi:10.1016/j.bbrc.2025.153134
+          </a>
+          &nbsp;
+          <a class="ref-access" href="https://pubmed.ncbi.nlm.nih.gov/41411906/" target="_blank" rel="noopener" style="border-color:rgba(100,116,139,.35);color:#94a3b8;background:rgba(100,116,139,.08)">
+            PubMed Record
+          </a>
+        </div>
+      </div>
+
+      <!-- REF 5 -->
+      <div class="ref-card" id="ref-5" data-fuels="glucose,lactate">
+        <div class="ref-card-head">
+          <div class="ref-num">5</div>
+          <div class="ref-title-block">
+            <div class="ref-title">The Role of Lactate in Cancer Immunotherapy: Mechanisms and Applications</div>
+            <div class="ref-meta">Fan Y, Jia H, Zhang W · <em>Current Cancer Drug Targets</em>, 2025 · PMID: 40685726</div>
+          </div>
+        </div>
+        <div class="ref-card-body">
+          <div class="ref-section-label">Summary</div>
+          <div class="ref-summary">Researchers from Tongji Hospital (Huazhong University of Science and Technology) and Beijing Children's Hospital synthesize the latest science on lactate — the metabolic "exhaust" of glycolysis — and its surprisingly active role in cancer biology. Far from being inert waste, lactate is now understood to be a key immunosuppressive agent, a recycled fuel (lactate shuttle), and an epigenetic regulator (via histone lactylation — a newly discovered modification where lactate chemically tags DNA-packaging proteins, changing which genes are expressed). The paper makes the case that monitoring and targeting lactate anabolism and lactate transport proteins (MCT1/MCT4) represents a promising and underexplored strategy for improving cancer immunotherapy outcomes.</div>
+          <div class="ref-section-label">Key Claims Supported</div>
+          <ul class="claim-list">
+            <li data-fuel="glucose,lactate">The Warburg effect and aerobic glycolysis are defining metabolic characteristics of numerous cancers</li>
+            <li data-fuel="glucose">Glucose uptake and glycolysis provide intermediates for anabolic reactions and energy for cancer cell proliferation</li>
+            <li data-fuel="lactate">Increased lactate production contributes to immunosuppression within the tumor microenvironment</li>
+            <li data-fuel="lactate">Tumors exploit lactate via three mechanisms: lactate anabolism, lactate shuttling, and lysine lactylation (epigenetic)</li>
+            <li data-fuel="lactate">MCT1/MCT4 lactate transport proteins are viable therapeutic targets to enhance immunotherapy</li>
+          </ul>
+          <a class="ref-access" href="https://doi.org/10.2174/0115680096373625250701095509" target="_blank" rel="noopener">
+            🔗 Access Article · doi:10.2174/0115680096373625250701095509
+          </a>
+          &nbsp;
+          <a class="ref-access" href="https://pubmed.ncbi.nlm.nih.gov/40685726/" target="_blank" rel="noopener" style="border-color:rgba(100,116,139,.35);color:#94a3b8;background:rgba(100,116,139,.08)">
+            PubMed Record
+          </a>
+        </div>
+      </div>
+
+      <!-- REF 6 -->
+      <div class="ref-card" id="ref-6" data-fuels="glucose,lipid,aminoacids">
+        <div class="ref-card-head">
+          <div class="ref-num">6</div>
+          <div class="ref-title-block">
+            <div class="ref-title">Macrophage Migration Inhibitory Factor Superfamily in Tumor Metabolism: Mechanistic Insights and Therapeutic Potential</div>
+            <div class="ref-meta">Xie W, Dong Y, Lv J, Wang X · <em>Biochemical Pharmacology</em>, 2026; 246:117720 · PMID: 41558614</div>
+          </div>
+        </div>
+        <div class="ref-card-body">
+          <div class="ref-section-label">Summary</div>
+          <div class="ref-summary">From Shandong Cancer Hospital and Shandong University, this advanced review examines how the cytokine MIF (Macrophage Migration Inhibitory Factor) acts as a master coordinator linking inflammation to the full spectrum of tumor metabolism — glucose, lipids, and amino acids. MIF signals through CD74 and co-receptors (CXCR2/CXCR4/CXCR7), activating PI3K/AKT and ERK pathways to drive aerobic glycolysis. It also controls the SREBP and PPAR lipid regulatory systems to orchestrate de novo lipogenesis, fatty acid oxidation flexibility, and cholesterol/membrane homeostasis in tumor cells. Additionally, MIF reshapes amino acid transport, glutamine utilization, and redox balance. The paper rigorously grades evidence and proposes imaging- and flux-based approaches to translate MIF-axis findings into clinical trials.</div>
+          <div class="ref-section-label">Key Claims Supported</div>
+          <ul class="claim-list">
+            <li data-fuel="glucose">MIF promotes glucose uptake and aerobic glycolysis (Warburg effect) via PI3K/AKT and ERK pathway activation</li>
+            <li data-fuel="lipid">Lipid regulators SREBP and PPAR are coordinated by MIF to enhance de novo lipogenesis and fatty acid β-oxidation</li>
+            <li data-fuel="lipid">Cancer cells exhibit metabolic flexibility in lipid fuel use (between synthesis and oxidation) controlled by MIF signaling</li>
+            <li data-fuel="aminoacids,glutamine">MIF reshapes amino acid transport and glutamine utilization in the tumor microenvironment</li>
+            <li data-fuel="glucose,lipid,aminoacids">The MIF/CD74 axis is a validated, multi-pathway drug target linking metabolic and immune suppression functions</li>
+          </ul>
+          <a class="ref-access" href="https://doi.org/10.1016/j.bcp.2026.117720" target="_blank" rel="noopener">
+            🔗 Access Article · doi:10.1016/j.bcp.2026.117720
+          </a>
+          &nbsp;
+          <a class="ref-access" href="https://pubmed.ncbi.nlm.nih.gov/41558614/" target="_blank" rel="noopener" style="border-color:rgba(100,116,139,.35);color:#94a3b8;background:rgba(100,116,139,.08)">
+            PubMed Record
+          </a>
+        </div>
+      </div>
+
+      <!-- REF 7 -->
+      <div class="ref-card" id="ref-7" data-fuels="lipid,fructose">
+        <div class="ref-card-head">
+          <div class="ref-num">7</div>
+          <div class="ref-title-block">
+            <div class="ref-title">ACSL3 Promotes Hepatocellular Carcinoma Tumorigenesis and Correlates With JAK-STAT3 Signaling</div>
+            <div class="ref-meta">Amelimojarad M, Amelimojarad M, Pourmahdian A, Lu Z · <em>Cancer Medicine</em>, 2026; 15(2):e71543 · PMID: 41667906 <span class="open-access-badge">✓ Open Access · PMC12890578</span></div>
+          </div>
+        </div>
+        <div class="ref-card-body">
+          <div class="ref-section-label">Summary</div>
+          <div class="ref-summary">Researchers from Iran University of Medical Sciences and Liaoning University identify ACSL3 (Acyl-CoA Synthetase Long Chain Family Member 3) as a key lipid metabolism enzyme strongly linked to poor prognosis in liver cancer (HCC). ACSL3 is consistently overexpressed in HCC models, and its high expression correlates with STAT3 signaling pathway activation — a powerful oncogenic signaling hub. Bioinformatic analyses revealed that high ACSL3 drives upregulation of key lipogenic enzymes, creating a self-amplifying feedback loop: cancer activates lipid synthesis, which sustains STAT3 signaling, which further activates lipid synthesis. The study also found a striking correlation between ACSL3 expression and PD-L1 — the primary immune checkpoint molecule — linking de novo lipogenesis directly to immune evasion.</div>
+          <div class="ref-section-label">Key Claims Supported</div>
+          <ul class="claim-list">
+            <li data-fuel="lipid,fructose">Reprogrammed lipid metabolism driven by upregulated de novo lipogenesis is a key tumorigenic mechanism in HCC</li>
+            <li data-fuel="lipid">ACSL3 is a lipid metabolism enzyme strongly correlated with poor HCC prognosis and tumor progression</li>
+            <li data-fuel="lipid">High ACSL3 is associated with STAT3 pathway activation and upregulation of additional lipogenic enzymes (feedforward loop)</li>
+            <li data-fuel="lipid">ACSL3 expression correlates with PD-L1 — connecting fatty acid metabolism to immune checkpoint regulation</li>
+            <li data-fuel="lipid,fructose">ACSL3 is a candidate therapeutic biomarker and drug target bridging lipid metabolism and oncogenic signaling</li>
+          </ul>
+          <a class="ref-access" href="https://doi.org/10.1002/cam4.71543" target="_blank" rel="noopener">
+            🔓 Read Full Article (Open Access) · doi:10.1002/cam4.71543
+          </a>
+          &nbsp;
+          <a class="ref-access" href="https://pubmed.ncbi.nlm.nih.gov/41667906/" target="_blank" rel="noopener" style="border-color:rgba(100,116,139,.35);color:#94a3b8;background:rgba(100,116,139,.08)">
+            PubMed Record
+          </a>
+        </div>
+      </div>
+
+      <!-- REF 8 -->
+      <div class="ref-card" id="ref-8" data-fuels="lipid">
+        <div class="ref-card-head">
+          <div class="ref-num">8</div>
+          <div class="ref-title-block">
+            <div class="ref-title">The Interplay Between Extracellular Matrix Remodeling and Cellular Lipid Metabolic Reprogramming in Cancer: A Review</div>
+            <div class="ref-meta">Yin M, Li X, Zhang S, Xie SA · <em>Molecular Biology Reports</em>, 2025; 53(1):145 · PMID: 41324766</div>
+          </div>
+        </div>
+        <div class="ref-card-body">
+          <div class="ref-section-label">Summary</div>
+          <div class="ref-summary">A Beijing Friendship Hospital / Capital Medical University team reviews the bidirectional crosstalk between the tumor's physical scaffold (extracellular matrix, ECM) and cancer lipid metabolism. They reveal that these two systems form a self-amplifying feedback circuit: ECM remodeling (driven by tumor-associated proteases and structural proteins like collagen) regulates lipid anabolism and catabolism, which in turn provides the energy and membrane materials for further ECM degradation and tumor invasion. Reprogrammed lipid metabolism — de novo lipogenesis, fatty acid oxidation (FAO), and lipid peroxidation — is characterized as a metabolic hallmark of cancer. The authors identify critical intervention nodes in this circuit, including collagen-driven cues and intracellular FAO pathways, as targets to disrupt tumor-stroma co-evolution and improve drug efficacy.</div>
+          <div class="ref-section-label">Key Claims Supported</div>
+          <ul class="claim-list">
+            <li data-fuel="lipid">De novo lipogenesis, fatty acid oxidation, and lipid peroxidation are established metabolic hallmarks of cancer</li>
+            <li data-fuel="lipid">ECM remodeling and lipid metabolic reprogramming engage in a self-amplifying bidirectional feedback loop</li>
+            <li data-fuel="lipid">Lipid metabolites produced by cancer cells fuel energy production, membrane biosynthesis, and invasion signaling</li>
+            <li data-fuel="lipid">Fatty acid oxidation (FAO) is a critical cancer energy pathway and a high-value therapeutic target</li>
+            <li data-fuel="lipid">The ECM–lipid metabolism axis drives tumorigenesis, metastasis, and drug resistance in a context-dependent manner</li>
+          </ul>
+          <a class="ref-access" href="https://doi.org/10.1007/s11033-025-11283-8" target="_blank" rel="noopener">
+            🔗 Access Article · doi:10.1007/s11033-025-11283-8
+          </a>
+          &nbsp;
+          <a class="ref-access" href="https://pubmed.ncbi.nlm.nih.gov/41324766/" target="_blank" rel="noopener" style="border-color:rgba(100,116,139,.35);color:#94a3b8;background:rgba(100,116,139,.08)">
+            PubMed Record
+          </a>
+        </div>
+      </div>
+
+    </div><!-- /ref-list -->
+
+    <p class="disclaimer">This page is for educational and research purposes only. It does not constitute medical advice or a treatment recommendation. All metabolic data is drawn from peer-reviewed research indexed in PubMed. Cancer therapy must be guided by qualified oncologists. All articles are attributed to PubMed per required terms of use; DOI links to original publications are provided for each reference.</p>
+  </div>
+
+</main>
+
+<script>
+  // Map each fuel key to the ref IDs that cover it
+  const fuelRefMap = {
+    glucose:    ['ref-1','ref-3','ref-5','ref-6'],
+    glutamine:  ['ref-1','ref-2','ref-3','ref-4'],
+    lipid:      ['ref-6','ref-7','ref-8'],
+    lactate:    ['ref-1','ref-3','ref-5'],
+    aminoacids: ['ref-1','ref-6'],
+    fructose:   ['ref-1','ref-7']
+  };
+
+  let activeTimeouts = [];
+
+  function clearHighlights() {
+    // Remove all flash classes and active-claim highlights
+    document.querySelectorAll('.ref-card.flash').forEach(el => {
+      el.classList.remove('flash');
+      void el.offsetWidth; // force reflow to allow re-triggering
+    });
+    document.querySelectorAll('.claim-list li.active-claim').forEach(li => {
+      li.classList.remove('active-claim');
+    });
+    activeTimeouts.forEach(t => clearTimeout(t));
+    activeTimeouts = [];
+  }
+
+  function jumpToRefs(fuelKey) {
+    clearHighlights();
+
+    const refIds = fuelRefMap[fuelKey] || [];
+    if (!refIds.length) return;
+
+    // Scroll to first matching ref card
+    const firstCard = document.getElementById(refIds[0]);
+    if (firstCard) {
+      firstCard.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }
+
+    // Stagger flash on each relevant ref card + highlight matching claims
+    refIds.forEach((id, i) => {
+      const card = document.getElementById(id);
+      if (!card) return;
+
+      const t = setTimeout(() => {
+        // Flash the card
+        card.classList.remove('flash');
+        void card.offsetWidth;
+        card.classList.add('flash');
+
+        // Highlight claims that are tagged with this fuel
+        const claims = card.querySelectorAll('.claim-list li[data-fuel]');
+        claims.forEach(li => {
+          const fuels = li.getAttribute('data-fuel').split(',');
+          if (fuels.includes(fuelKey)) {
+            li.classList.add('active-claim');
+            // Remove highlight after animation
+            const removeT = setTimeout(() => li.classList.remove('active-claim'), 2400);
+            activeTimeouts.push(removeT);
+          }
+        });
+
+        // Remove flash class after animation completes
+        const removeFlash = setTimeout(() => card.classList.remove('flash'), 1800);
+        activeTimeouts.push(removeFlash);
+
+      }, i * 180);
+
+      activeTimeouts.push(t);
+    });
+  }
+</script>
+
+</body>
+</html>

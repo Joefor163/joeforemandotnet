@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Topic Title — Joe Foreman</title>
+  <meta name="description" content="Description of this topic site." />
+
+  <!-- Cloudflare Web Analytics (same token as homepage) -->
+  <!-- <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
+    data-cf-beacon='{"token": "PASTE_YOUR_TOKEN_HERE"}'></script> -->
+
+  <style>
+    :root {
+      --color-bg:        #0f1117;
+      --color-surface:   #1a1d27;
+      --color-border:    #2a2d3a;
+      --color-accent:    #4f7ef8;
+      --color-accent-2:  #7c5cbf;
+      --color-text:      #e8eaf0;
+      --color-muted:     #8b8fa8;
+      --radius:          12px;
+      --max-width:       780px;
+      --font-sans:       'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-sans);
+      line-height: 1.7;
+      min-height: 100vh;
+    }
+
+    a { color: var(--color-accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    /* NAV */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 17, 23, 0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 56px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .nav-back {
+      font-size: 0.9rem;
+      color: var(--color-muted);
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      transition: color 0.2s;
+    }
+
+    .nav-back:hover { color: var(--color-text); text-decoration: none; }
+
+    .nav-logo {
+      font-size: 1rem;
+      font-weight: 700;
+      color: var(--color-text);
+    }
+
+    /* PAGE CONTENT */
+    .page {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 64px 24px 96px;
+    }
+
+    .page-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      background: rgba(79,126,248,0.1);
+      border-radius: 6px;
+      padding: 4px 12px;
+      margin-bottom: 20px;
+    }
+
+    .page-title {
+      font-size: clamp(2rem, 5vw, 3rem);
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      line-height: 1.2;
+      margin-bottom: 16px;
+    }
+
+    .page-subtitle {
+      font-size: 1.1rem;
+      color: var(--color-muted);
+      margin-bottom: 48px;
+      padding-bottom: 48px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    /* ARTICLE / POST CARDS */
+    .posts-list {
+      display: flex;
+      flex-direction: column;
+      gap: 32px;
+    }
+
+    .post-card {
+      display: block;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .post-card:hover {
+      border-color: var(--color-accent);
+      transform: translateY(-2px);
+      text-decoration: none;
+    }
+
+    .post-date {
+      font-size: 0.78rem;
+      color: var(--color-muted);
+      margin-bottom: 10px;
+    }
+
+    .post-title {
+      font-size: 1.15rem;
+      font-weight: 700;
+      color: var(--color-text);
+      margin-bottom: 8px;
+    }
+
+    .post-excerpt {
+      font-size: 0.9rem;
+      color: var(--color-muted);
+    }
+
+    /* VIDEO EMBEDS */
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%;
+      height: 0;
+      overflow: hidden;
+      border-radius: var(--radius);
+      margin: 40px 0;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      border: 0;
+    }
+
+    /* PROSE content */
+    .prose h2 {
+      font-size: 1.5rem;
+      font-weight: 700;
+      margin: 48px 0 16px;
+    }
+
+    .prose p {
+      margin-bottom: 20px;
+      color: var(--color-text);
+    }
+
+    .prose p:first-child { color: var(--color-text); }
+
+    /* FOOTER */
+    footer {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      padding: 32px 0;
+      text-align: center;
+      font-size: 0.82rem;
+      color: var(--color-muted);
+    }
+
+    footer a { color: var(--color-muted); }
+    footer a:hover { color: var(--color-text); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a class="nav-back" href="/">← Joe Foreman</a>
+      <span class="nav-logo">Topic Title</span>
+    </nav>
+  </header>
+
+  <main class="page">
+
+    <span class="page-tag">Category</span>
+    <h1 class="page-title">Topic Title</h1>
+    <p class="page-subtitle">A short description of what this section of the site covers and who it's for.</p>
+
+    <!-- ══════════════════════════════════════════════════════════
+         ADD YOUR POSTS / ARTICLES HERE
+         Copy a .post-card block for each new article.
+         The href should point to the article file, e.g. href="my-article.html"
+    ══════════════════════════════════════════════════════════ -->
+    <div class="posts-list">
+
+      <a class="post-card" href="#">
+        <div class="post-date">March 2026</div>
+        <div class="post-title">Your first article title goes here</div>
+        <p class="post-excerpt">A one or two sentence excerpt that gives the reader a reason to click through.</p>
+      </a>
+
+    </div>
+
+    <!-- ══════════════════════════════════════════════════════════
+         ADD A YOUTUBE VIDEO (optional)
+         Replace VIDEOID with the ID from the YouTube URL.
+         Example: https://www.youtube.com/watch?v=VIDEOID
+    ══════════════════════════════════════════════════════════ -->
+    <!--
+    <div class="video-wrapper">
+      <iframe
+        src="https://www.youtube.com/embed/VIDEOID"
+        title="Video title"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowfullscreen>
+      </iframe>
+    </div>
+    -->
+
+  </main>
+
+  <footer>
+    &copy; <script>document.write(new Date().getFullYear())</script> Joe Foreman. All rights reserved.
+  </footer>
+
+</body>
+</html>

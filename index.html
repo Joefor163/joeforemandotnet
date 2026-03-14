@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Joe Foreman</title>
+  <meta name="description" content="Joe Foreman's personal website — articles, projects, and videos." />
+
+  <!-- ================================================
+       CLOUDFLARE WEB ANALYTICS
+       Replace the token below with your real token from
+       Cloudflare Dashboard > Analytics > Web Analytics
+       ================================================ -->
+  <!-- <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
+    data-cf-beacon='{"token": "PASTE_YOUR_TOKEN_HERE"}'></script> -->
+
+  <style>
+    /* ─────────────────────────────────────────
+       DESIGN TOKENS
+    ───────────────────────────────────────── */
+    :root {
+      --color-bg:        #0f1117;
+      --color-surface:   #1a1d27;
+      --color-border:    #2a2d3a;
+      --color-accent:    #4f7ef8;
+      --color-accent-2:  #7c5cbf;
+      --color-text:      #e8eaf0;
+      --color-muted:     #8b8fa8;
+      --radius:          12px;
+      --max-width:       1100px;
+      --font-sans:       'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    /* ─────────────────────────────────────────
+       RESET & BASE
+    ───────────────────────────────────────── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background: var(--color-bg);
+      color: var(--color-text);
+      font-family: var(--font-sans);
+      line-height: 1.65;
+      min-height: 100vh;
+    }
+
+    a { color: var(--color-accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    img { max-width: 100%; display: block; }
+
+    /* ─────────────────────────────────────────
+       LAYOUT HELPERS
+    ───────────────────────────────────────── */
+    .container {
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .section {
+      padding: 72px 0;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      margin-bottom: 10px;
+    }
+
+    .section-title {
+      font-size: clamp(1.6rem, 3vw, 2.2rem);
+      font-weight: 700;
+      margin-bottom: 40px;
+      color: var(--color-text);
+    }
+
+    /* ─────────────────────────────────────────
+       HEADER / NAV
+    ───────────────────────────────────────── */
+    header {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(15, 17, 23, 0.85);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    nav {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 60px;
+      max-width: var(--max-width);
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    .nav-logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      color: var(--color-text);
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 28px;
+      list-style: none;
+    }
+
+    .nav-links a {
+      color: var(--color-muted);
+      font-size: 0.9rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:hover {
+      color: var(--color-text);
+      text-decoration: none;
+    }
+
+    /* ─────────────────────────────────────────
+       HERO
+    ───────────────────────────────────────── */
+    .hero {
+      padding: 96px 0 80px;
+      position: relative;
+      overflow: hidden;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px;
+      left: -200px;
+      width: 600px;
+      height: 600px;
+      background: radial-gradient(circle, rgba(79,126,248,0.12) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    .hero-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.8rem;
+      font-weight: 600;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      border: 1px solid rgba(79,126,248,0.3);
+      background: rgba(79,126,248,0.07);
+      padding: 5px 14px;
+      border-radius: 100px;
+      margin-bottom: 28px;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.4rem, 5vw, 3.8rem);
+      font-weight: 800;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin-bottom: 22px;
+      max-width: 700px;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--color-accent), var(--color-accent-2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero-sub {
+      font-size: 1.15rem;
+      color: var(--color-muted);
+      max-width: 520px;
+      margin-bottom: 38px;
+    }
+
+    .hero-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--color-accent);
+      color: #fff;
+      font-weight: 600;
+      padding: 12px 26px;
+      border-radius: var(--radius);
+      transition: opacity 0.2s;
+    }
+
+    .hero-cta:hover {
+      opacity: 0.88;
+      text-decoration: none;
+    }
+
+    /* ─────────────────────────────────────────
+       SITE CARDS GRID
+    ───────────────────────────────────────── */
+    .cards-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 24px;
+    }
+
+    /* ── HOW TO ADD A NEW SITE CARD ──────────────────────────────────────────
+       Copy the block below (from <!-- SITE CARD --> to <!-- /SITE CARD -->)
+       and paste it inside .cards-grid in the HTML below.
+       Fill in:
+         href        → "/your-subfolder/"   (the folder name you created)
+         data-tag    → topic category label
+         card-title  → name of the site
+         card-desc   → one-sentence description
+    ──────────────────────────────────────────────────────────────────────── */
+
+    .card {
+      display: flex;
+      flex-direction: column;
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      padding: 28px;
+      transition: border-color 0.2s, transform 0.2s;
+      cursor: pointer;
+    }
+
+    .card:hover {
+      border-color: var(--color-accent);
+      transform: translateY(-3px);
+      text-decoration: none;
+    }
+
+    .card-tag {
+      display: inline-block;
+      font-size: 0.7rem;
+      font-weight: 700;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--color-accent);
+      background: rgba(79,126,248,0.1);
+      border-radius: 6px;
+      padding: 3px 10px;
+      margin-bottom: 16px;
+      width: fit-content;
+    }
+
+    .card-title {
+      font-size: 1.2rem;
+      font-weight: 700;
+      margin-bottom: 10px;
+      color: var(--color-text);
+    }
+
+    .card-desc {
+      font-size: 0.9rem;
+      color: var(--color-muted);
+      flex: 1;
+    }
+
+    .card-arrow {
+      margin-top: 22px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--color-accent);
+    }
+
+    /* ─────────────────────────────────────────
+       VIDEOS SECTION
+    ───────────────────────────────────────── */
+
+    /* ── HOW TO ADD A NEW VIDEO ───────────────────────────────────────────
+       Copy the block below (from <!-- VIDEO --> to <!-- /VIDEO -->)
+       and paste it inside .videos-grid in the HTML below.
+       Fill in:
+         src         → YouTube embed URL:
+                       Take a YouTube URL like https://www.youtube.com/watch?v=VIDEOID
+                       and change it to  https://www.youtube.com/embed/VIDEOID
+         title       → The video title (shown below the video)
+         description → Optional one-line description
+    ──────────────────────────────────────────────────────────────────────── */
+
+    .videos-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: 28px;
+    }
+
+    .video-item {
+      background: var(--color-surface);
+      border: 1px solid var(--color-border);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    .video-wrapper {
+      position: relative;
+      padding-bottom: 56.25%; /* 16:9 */
+      height: 0;
+      overflow: hidden;
+    }
+
+    .video-wrapper iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      border: 0;
+    }
+
+    .video-info {
+      padding: 18px 20px;
+    }
+
+    .video-title {
+      font-size: 1rem;
+      font-weight: 600;
+      margin-bottom: 6px;
+      color: var(--color-text);
+    }
+
+    .video-desc {
+      font-size: 0.85rem;
+      color: var(--color-muted);
+    }
+
+    /* ─────────────────────────────────────────
+       EMPTY STATE (shown when no content yet)
+    ───────────────────────────────────────── */
+    .empty-state {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 56px 24px;
+      border: 2px dashed var(--color-border);
+      border-radius: var(--radius);
+      color: var(--color-muted);
+    }
+
+    .empty-state p { font-size: 0.95rem; }
+
+    /* ─────────────────────────────────────────
+       DIVIDER
+    ───────────────────────────────────────── */
+    .divider {
+      height: 1px;
+      background: var(--color-border);
+    }
+
+    /* ─────────────────────────────────────────
+       FOOTER
+    ───────────────────────────────────────── */
+    footer {
+      background: var(--color-surface);
+      border-top: 1px solid var(--color-border);
+      padding: 36px 0;
+      text-align: center;
+      font-size: 0.85rem;
+      color: var(--color-muted);
+    }
+
+    footer a {
+      color: var(--color-muted);
+      transition: color 0.2s;
+    }
+
+    footer a:hover { color: var(--color-text); text-decoration: none; }
+
+    .footer-inner {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 10px;
+    }
+
+    /* ─────────────────────────────────────────
+       RESPONSIVE
+    ───────────────────────────────────────── */
+    @media (max-width: 600px) {
+      .nav-links { display: none; }
+      .hero { padding: 64px 0 56px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- ═══════════════════════════════════════════
+       HEADER
+  ═══════════════════════════════════════════ -->
+  <header>
+    <nav>
+      <span class="nav-logo">Joe Foreman</span>
+      <ul class="nav-links">
+        <li><a href="#sites">Topics</a></li>
+        <li><a href="#videos">Videos</a></li>
+      </ul>
+    </nav>
+  </header>
+
+
+  <!-- ═══════════════════════════════════════════
+       HERO
+  ═══════════════════════════════════════════ -->
+  <section class="hero">
+    <div class="container">
+      <div class="hero-eyebrow">✦ Welcome</div>
+      <h1>Ideas, articles,<br/>and <span>things I care about</span></h1>
+      <p class="hero-sub">
+        A collection of topics I explore in depth — from long-form writing to video.
+        Browse the sites below or watch the latest videos.
+      </p>
+      <a href="#sites" class="hero-cta">Explore topics ↓</a>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       TOPICAL SITES
+  ═══════════════════════════════════════════ -->
+  <section class="section" id="sites">
+    <div class="container">
+      <p class="section-label">Topics</p>
+      <h2 class="section-title">My sites</h2>
+
+      <div class="cards-grid">
+
+        <!-- ══════════════════════════════════
+             ADD SITE CARDS HERE
+             See the comment above .card {} in
+             the CSS for instructions.
+             ══════════════════════════════════ -->
+
+        <!-- EXAMPLE CARD — delete this when you add real ones
+        <a class="card" href="/example-topic/">
+          <span class="card-tag">Example</span>
+          <div class="card-title">Example Topic</div>
+          <p class="card-desc">A short description of what this site is about and who it's for.</p>
+          <span class="card-arrow">Read more →</span>
+        </a>
+        -->
+
+        <!-- SITE CARD -->
+        <a class="card" href="/cancer-ai/">
+          <span class="card-tag">Health &amp; Research</span>
+          <div class="card-title">Cancer &amp; AI</div>
+          <p class="card-desc">AI-assisted research into cancer metabolism, the foods that fuel tumors, and what the science says about diet and cancer risk.</p>
+          <span class="card-arrow">Read more →</span>
+        </a>
+        <!-- /SITE CARD -->
+
+      </div>
+    </div>
+  </section>
+
+
+  <div class="divider"></div>
+
+
+  <!-- ═══════════════════════════════════════════
+       VIDEOS
+  ═══════════════════════════════════════════ -->
+  <section class="section" id="videos">
+    <div class="container">
+      <p class="section-label">Watch</p>
+      <h2 class="section-title">Videos</h2>
+
+      <div class="videos-grid">
+
+        <!-- ══════════════════════════════════
+             ADD YOUTUBE VIDEOS HERE
+             See the comment above .video-item
+             in the CSS for instructions.
+             ══════════════════════════════════ -->
+
+        <!-- EXAMPLE VIDEO — delete this when you add real ones
+        <div class="video-item">
+          <div class="video-wrapper">
+            <iframe
+              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+              title="Example video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowfullscreen>
+            </iframe>
+          </div>
+          <div class="video-info">
+            <div class="video-title">Video Title Goes Here</div>
+            <p class="video-desc">A short description of what this video covers.</p>
+          </div>
+        </div>
+        -->
+
+        <div class="empty-state">
+          <p>Videos will appear here.<br/>Just give Claude a YouTube link and it will add it for you.</p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ═══════════════════════════════════════════
+       FOOTER
+  ═══════════════════════════════════════════ -->
+  <footer>
+    <div class="container">
+      <div class="footer-inner">
+        <span>&copy; <span id="year"></span> Joe Foreman. All rights reserved.</span>
+        <span>Built with care &amp; maintained with <a href="https://claude.ai">Claude</a>.</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Auto-update copyright year
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+
+</body>
+</html>

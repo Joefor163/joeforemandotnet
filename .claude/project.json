@@ -1,0 +1,30 @@
+{
+  "_comment": "Claude project config — safe to commit, contains no secrets",
+  "owner": "Joe Foreman",
+  "email": "j@rocketscicom.com",
+
+  "github": {
+    "repo": "joeforemandotnet",
+    "branch": "main"
+  },
+
+  "cloudflare": {
+    "account_id": "246683d64f4cbf0279f0e414299d5bb9",
+    "pages_project": "joeforemandotnet",
+    "token_path": "~/.cloudflare/token",
+    "_note": "Token is stored locally at token_path — never commit the token itself"
+  },
+
+  "site": {
+    "local_path": "Joe's Website Home Page",
+    "copyright_name": "Joe Foreman",
+    "analytics_enabled": false,
+    "_analytics_note": "Set to true and add token to index.html to enable Cloudflare Web Analytics"
+  },
+
+  "workflow": {
+    "deploy_method": "github_actions",
+    "deploy_file": ".github/workflows/deploy.yml",
+    "auto_deploy_on_push": true
+  }
+}

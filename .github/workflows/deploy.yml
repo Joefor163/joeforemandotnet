@@ -1,0 +1,46 @@
+# ─────────────────────────────────────────────────────────────────
+# Cloudflare Pages — Auto-deploy on push to main
+#
+# How it works:
+#   1. You commit + push in GitHub Desktop
+#   2. GitHub runs this workflow automatically
+#   3. Wrangler deploys your files to Cloudflare Pages
+#   4. Live site is updated in ~60 seconds
+#
+# Required GitHub secrets (Settings → Secrets → Actions):
+#   CLOUDFLARE_API_TOKEN   — your Cloudflare API token
+#   CLOUDFLARE_ACCOUNT_ID  — your Cloudflare Account ID (see below)
+#
+# Finding your Account ID:
+#   Log into dash.cloudflare.com → click any domain (or go to
+#   Workers & Pages) → the Account ID is in the right-hand sidebar
+#   or in the URL: dash.cloudflare.com/<ACCOUNT_ID>/...
+# ─────────────────────────────────────────────────────────────────
+
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:   # allows manual trigger from GitHub UI
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    name: Deploy
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Deploy to Cloudflare Pages
+        uses: cloudflare/pages-action@v1
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: 246683d64f4cbf0279f0e414299d5bb9
+          projectName: joeforemandotnet
+          directory: .
+          # Creates the Pages project automatically on first deploy
+          # gitHubToken enables deployment status comments on PRs (optional)
+          gitHubToken: ${{ secrets.GITHUB_TOKEN }}
+          wranglerVersion: '3'
