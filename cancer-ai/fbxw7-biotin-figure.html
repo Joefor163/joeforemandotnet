@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>FBXW7 · Biotin · c-MYC Pathway Figure</title>
+  <style>
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { font-size: 18px; }
+    body {
+      font-family: 'Segoe UI', system-ui, sans-serif;
+      background: #f8fafc;
+      color: #1e293b;
+      min-height: 100vh;
+      padding: 2rem 1.5rem 3rem;
+    }
+
+    /* ── PAGE HEADER ── */
+    .page-header { text-align: center; margin-bottom: 2rem; }
+    .fig-label {
+      display: inline-block;
+      font-size: .85rem; font-weight: 700; letter-spacing: .15em;
+      text-transform: uppercase; color: #0891b2;
+      border: 1px solid rgba(8,145,178,.35); background: rgba(8,145,178,.08);
+      padding: .25rem .85rem; border-radius: 999px; margin-bottom: .75rem;
+    }
+    .page-header h1 {
+      font-size: clamp(1.4rem, 3vw, 2rem); font-weight: 800; color: #0f172a;
+      line-height: 1.2; margin-bottom: .5rem;
+    }
+    .page-header p {
+      font-size: 1rem; color: #64748b; max-width: 700px; margin: 0 auto;
+    }
+
+    /* ── LEGEND ── */
+    .legend {
+      display: flex; flex-wrap: wrap; justify-content: center;
+      gap: .5rem 1.25rem; margin-bottom: 1.75rem;
+    }
+    .leg-item {
+      display: flex; align-items: center; gap: .4rem;
+      font-size: .88rem; font-weight: 600; color: #475569;
+    }
+    .leg-dot {
+      width: 14px; height: 14px; border-radius: 3px; flex-shrink: 0;
+    }
+
+    /* ── PANELS WRAPPER ── */
+    .panels {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+      max-width: 1300px;
+      margin: 0 auto 2rem;
+    }
+    @media (max-width: 900px) { .panels { grid-template-columns: 1fr; } }
+
+    .panel {
+      background: #fff;
+      border: 1.5px solid #e2e8f0;
+      border-radius: 16px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,.07);
+    }
+    .panel-header {
+      padding: .85rem 1.25rem;
+      display: flex; align-items: center; gap: .6rem;
+      font-weight: 700; font-size: 1.05rem;
+    }
+    .panel-header.active  { background: #f0fdf4; color: #15803d; border-bottom: 1.5px solid #bbf7d0; }
+    .panel-header.mutant  { background: #fef2f2; color: #b91c1c; border-bottom: 1.5px solid #fecaca; }
+    .panel-header .badge {
+      font-size: .8rem; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+      padding: 2px 8px; border-radius: 999px;
+    }
+    .badge-active { background: #dcfce7; color: #15803d; }
+    .badge-mutant { background: #fee2e2; color: #b91c1c; }
+
+    .panel svg { display: block; width: 100%; }
+
+    /* ── BOTTOM MECHANISM BOX ── */
+    .mechanism {
+      max-width: 1300px; margin: 0 auto 2rem;
+      background: #fff; border: 1.5px solid #e2e8f0; border-radius: 16px;
+      padding: 1.5rem 2rem;
+      box-shadow: 0 2px 8px rgba(0,0,0,.06);
+    }
+    .mechanism h3 {
+      font-size: 1.1rem; font-weight: 700; color: #0f172a;
+      margin-bottom: 1rem; display: flex; align-items: center; gap: .5rem;
+    }
+    .steps {
+      display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1rem;
+    }
+    .step {
+      background: #f8fafc; border: 1px solid #e2e8f0; border-radius: 10px;
+      padding: 1rem 1.1rem;
+    }
+    .step-num {
+      display: inline-flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px; border-radius: 50%;
+      font-size: .9rem; font-weight: 800; margin-bottom: .5rem;
+      flex-shrink: 0;
+    }
+    .step p { font-size: .95rem; color: #334155; line-height: 1.6; margin-top: .3rem; }
+    .step strong { color: #0f172a; }
+
+    /* ── CITATION ── */
+    .citation {
+      max-width: 1300px; margin: 0 auto;
+      font-size: .88rem; color: #94a3b8; text-align: center;
+    }
+    .citation a { color: #0284c7; }
+  </style>
+</head>
+<body>
+
+<nav style="position:sticky;top:0;z-index:100;display:flex;align-items:center;justify-content:space-between;height:52px;padding:0 24px;background:rgba(13,13,13,0.92);backdrop-filter:blur(10px);border-bottom:1px solid #2a2a2a;font-family:'Segoe UI',system-ui,sans-serif;">
+  <a href="/cancer-ai/glutamine-summary.html" style="color:#718096;font-size:.88rem;text-decoration:none;">← Glutamine Summary</a>
+  <a href="/" style="color:#718096;font-size:.88rem;text-decoration:none;">Joe Foreman</a>
+</nav>
+
+<!-- PAGE HEADER -->
+<div class="page-header">
+  <div class="fig-label">Molecular Pathway Figure</div>
+  <h1>FBXW7, Biotin &amp; c-MYC: The Glutamine Bypass Mechanism</h1>
+  <p>How the tumor suppressor FBXW7 and the vitamin biotin together control whether a cancer cell can escape glutamine addiction. Based on Lisci et al., <em>Molecular Cell</em> 2026.</p>
+</div>
+
+<!-- LEGEND -->
+<div class="legend">
+  <div class="leg-item"><div class="leg-dot" style="background:#15803d"></div>Tumor Suppressor</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#dc2626"></div>Oncogene / Cancer Driver</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#7c3aed"></div>Transcriptional Repressors</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#0891b2"></div>Enzyme</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#d97706"></div>Metabolite</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#9333ea"></div>Vitamin / Cofactor</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#15803d; border-radius:50%; border:2px dashed #15803d"></div>Mitochondria (TCA Cycle)</div>
+  <div class="leg-item"><div class="leg-dot" style="background:#bfdbfe; border-radius:50%; border:2px dashed #3b82f6"></div>Nucleus</div>
+</div>
+
+<!-- TWO PANELS -->
+<div class="panels">
+
+  <!-- ═══════════════════════════════════════════════════════
+       PANEL A: FBXW7 active / metabolically flexible
+       ═══════════════════════════════════════════════════════ -->
+  <div class="panel">
+    <div class="panel-header active">
+      <span>Panel A — FBXW7 Functional</span>
+      <span class="badge badge-active">Metabolic Flexibility ✓</span>
+    </div>
+    <!--
+      COMPARTMENT LAYOUT (bottom half of SVG, side by side):
+        LEFT  → NUCLEUS (blue dashed)  cx=170 cy=420 rx=148 ry=70  x:[22,318] y:[350,490]
+        RIGHT → MITOCHONDRIA (green dashed)  cx=445 cy=420 rx=100 ry=60  x:[345,545] y:[360,480]
+        They are separated by ~27px gap.
+    -->
+    <svg viewBox="0 0 560 540" xmlns="http://www.w3.org/2000/svg" style="height:540px">
+      <defs>
+        <marker id="arr-green" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#15803d"/>
+        </marker>
+        <marker id="arr-red-a" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#dc2626"/>
+        </marker>
+        <marker id="arr-blue" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#0284c7"/>
+        </marker>
+        <marker id="arr-amber" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#d97706"/>
+        </marker>
+        <marker id="arr-purple" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#9333ea"/>
+        </marker>
+        <marker id="arr-teal" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#0891b2"/>
+        </marker>
+      </defs>
+
+      <!-- ── CYTOPLASM label (background zone) ── -->
+      <text x="16" y="22" font-size="13" fill="#cbd5e1" font-weight="700" font-family="Segoe UI,sans-serif" letter-spacing="1">CYTOPLASM</text>
+
+      <!-- ══════════════ NUCLEUS (blue dashed, LEFT) ══════════════ -->
+      <ellipse cx="170" cy="422" rx="148" ry="70" fill="#eff6ff" stroke="#93c5fd" stroke-width="2" stroke-dasharray="7,3"/>
+      <!-- NUCLEUS zone label above ellipse, with pointer arrow -->
+      <text x="80" y="342" text-anchor="middle" font-size="14" fill="#2563eb" font-weight="800" font-family="Segoe UI,sans-serif">NUCLEUS</text>
+      <line x1="80" y1="345" x2="80" y2="351" stroke="#2563eb" stroke-width="1.5" marker-end="url(#arr-blue)"/>
+      <!-- watermark inside ellipse -->
+      <text x="95" y="468" text-anchor="middle" font-size="13" fill="#93c5fd" font-weight="700" font-family="Segoe UI,sans-serif" opacity="0.9">— NUCLEAR ZONE —</text>
+
+      <!-- PC Gene Promoter (OPEN) — inside nucleus -->
+      <rect x="100" y="372" width="145" height="58" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="2"/>
+      <text x="172" y="390" text-anchor="middle" font-size="13" fill="#15803d" font-weight="700" font-family="Segoe UI,sans-serif">PC Gene Promoter</text>
+      <text x="172" y="407" text-anchor="middle" font-size="12" fill="#16a34a" font-family="Segoe UI,sans-serif">🟢 OPEN — Active</text>
+      <text x="172" y="423" text-anchor="middle" font-size="11" fill="#2563eb" font-weight="600" font-family="Segoe UI,sans-serif">★ Inside Nucleus</text>
+
+      <!-- mRNA arrow out of nucleus upward -->
+      <line x1="172" y1="371" x2="172" y2="312" stroke="#16a34a" stroke-width="1.5" marker-end="url(#arr-green)" stroke-dasharray="4,3"/>
+      <text x="188" y="344" font-size="11" fill="#15803d" font-family="Segoe UI,sans-serif">mRNA</text>
+
+      <!-- ══════════════ MITOCHONDRIA (green dashed, RIGHT) ══════════════ -->
+      <ellipse cx="445" cy="422" rx="100" ry="62" fill="#f0fdf4" stroke="#15803d" stroke-width="2" stroke-dasharray="7,3"/>
+      <!-- MITOCHONDRIA zone label above ellipse, with pointer arrow -->
+      <text x="445" y="348" text-anchor="middle" font-size="13" fill="#15803d" font-weight="800" font-family="Segoe UI,sans-serif">MITOCHONDRIA</text>
+      <line x1="445" y1="351" x2="445" y2="358" stroke="#15803d" stroke-width="1.5" marker-end="url(#arr-green)"/>
+      <!-- TCA Cycle label inside mitochondria ellipse -->
+      <text x="445" y="404" text-anchor="middle" font-size="14" fill="#14532d" font-weight="800" font-family="Segoe UI,sans-serif">TCA Cycle</text>
+      <text x="445" y="422" text-anchor="middle" font-size="12" fill="#15803d" font-family="Segoe UI,sans-serif">→ ATP · Biosynthesis</text>
+      <text x="445" y="440" text-anchor="middle" font-size="11" fill="#166534" font-family="Segoe UI,sans-serif">★ Inside Mitochondria</text>
+
+      <!-- ══════════════ CYTOPLASM MOLECULES ══════════════ -->
+
+      <!-- FBXW7 -->
+      <rect x="28" y="50" width="128" height="54" rx="10" fill="#dcfce7" stroke="#15803d" stroke-width="2"/>
+      <text x="92" y="72" text-anchor="middle" font-size="15" fill="#14532d" font-weight="800" font-family="Segoe UI,sans-serif">FBXW7</text>
+      <text x="92" y="91" text-anchor="middle" font-size="12" fill="#15803d" font-family="Segoe UI,sans-serif">Tumor Suppressor</text>
+
+      <!-- c-MYC (being degraded, faded) -->
+      <rect x="200" y="50" width="110" height="54" rx="10" fill="#fee2e2" stroke="#dc2626" stroke-width="2" opacity="0.55"/>
+      <text x="255" y="72" text-anchor="middle" font-size="15" fill="#dc2626" font-weight="800" font-family="Segoe UI,sans-serif">c-MYC</text>
+      <text x="255" y="91" text-anchor="middle" font-size="12" fill="#dc2626" font-family="Segoe UI,sans-serif">⬇ Degraded</text>
+
+      <!-- FBXW7 → c-MYC (ubiquitinates) -->
+      <line x1="156" y1="77" x2="198" y2="77" stroke="#15803d" stroke-width="2" marker-end="url(#arr-green)"/>
+      <text x="177" y="70" text-anchor="middle" font-size="11" fill="#15803d" font-family="Segoe UI,sans-serif">Ub tags</text>
+
+      <!-- Ub circles on c-MYC -->
+      <circle cx="210" cy="53" r="7" fill="#d97706" stroke="#b45309" stroke-width="1"/>
+      <text x="210" y="58" text-anchor="middle" font-size="8" fill="white" font-weight="800" font-family="sans-serif">Ub</text>
+      <circle cx="226" cy="51" r="7" fill="#d97706" stroke="#b45309" stroke-width="1"/>
+      <text x="226" y="56" text-anchor="middle" font-size="8" fill="white" font-weight="800" font-family="sans-serif">Ub</text>
+
+      <!-- Proteasome -->
+      <ellipse cx="395" cy="77" rx="40" ry="25" fill="#f1f5f9" stroke="#475569" stroke-width="1.5"/>
+      <text x="395" y="74" text-anchor="middle" font-size="12" fill="#334155" font-weight="700" font-family="Segoe UI,sans-serif">Proteasome</text>
+      <text x="395" y="90" text-anchor="middle" font-size="11" fill="#64748b" font-family="Segoe UI,sans-serif">♻️ Degrades</text>
+
+      <!-- c-MYC → proteasome -->
+      <line x1="311" y1="77" x2="353" y2="77" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arr-red-a)"/>
+      <text x="332" y="70" text-anchor="middle" font-size="11" fill="#dc2626" font-family="Segoe UI,sans-serif">→ destroyed</text>
+
+      <!-- c-MYC kept low note -->
+      <text x="255" y="124" text-anchor="middle" font-size="11" fill="#94a3b8" font-family="Segoe UI,sans-serif">c-MYC kept low</text>
+      <text x="255" y="139" text-anchor="middle" font-size="11" fill="#94a3b8" font-family="Segoe UI,sans-serif">→ PC gene stays ON</text>
+
+      <!-- Pyruvate Carboxylase (PC) — expressed, cytoplasm -->
+      <rect x="50" y="198" width="145" height="58" rx="10" fill="#dbeafe" stroke="#0891b2" stroke-width="2"/>
+      <text x="122" y="220" text-anchor="middle" font-size="14" fill="#1e40af" font-weight="800" font-family="Segoe UI,sans-serif">Pyruvate</text>
+      <text x="122" y="238" text-anchor="middle" font-size="14" fill="#1e40af" font-weight="800" font-family="Segoe UI,sans-serif">Carboxylase (PC)</text>
+      <text x="122" y="253" text-anchor="middle" font-size="11" fill="#0891b2" font-family="Segoe UI,sans-serif">✓ Expressed &amp; Active</text>
+
+      <!-- mRNA → PC protein (translation arrow) -->
+      <line x1="195" y1="308" x2="148" y2="264" stroke="#16a34a" stroke-width="1.5" stroke-dasharray="4,2" marker-end="url(#arr-green)"/>
+      <text x="188" y="293" text-anchor="middle" font-size="11" fill="#15803d" font-family="Segoe UI,sans-serif" transform="rotate(-38,188,293)">Translated</text>
+
+      <!-- Biotin -->
+      <rect x="370" y="182" width="115" height="52" rx="10" fill="#f5f3ff" stroke="#9333ea" stroke-width="2"/>
+      <text x="427" y="204" text-anchor="middle" font-size="14" fill="#7c3aed" font-weight="800" font-family="Segoe UI,sans-serif">🟣 Biotin</text>
+      <text x="427" y="221" text-anchor="middle" font-size="11" fill="#9333ea" font-family="Segoe UI,sans-serif">Vitamin B7 · Cofactor</text>
+
+      <!-- Biotin → PC (activates) -->
+      <line x1="370" y1="210" x2="198" y2="228" stroke="#9333ea" stroke-width="2" marker-end="url(#arr-purple)"/>
+      <text x="292" y="210" text-anchor="middle" font-size="11" fill="#7c3aed" font-family="Segoe UI,sans-serif">activates ✓</text>
+
+      <!-- Pyruvate (cytoplasm) -->
+      <rect x="50" y="290" width="115" height="44" rx="9" fill="#fef9c3" stroke="#d97706" stroke-width="1.5"/>
+      <text x="107" y="311" text-anchor="middle" font-size="13" fill="#92400e" font-weight="700" font-family="Segoe UI,sans-serif">Pyruvate</text>
+      <text x="107" y="327" text-anchor="middle" font-size="11" fill="#b45309" font-family="Segoe UI,sans-serif">from glycolysis</text>
+
+      <!-- Pyruvate → PC (substrate) -->
+      <line x1="120" y1="289" x2="120" y2="258" stroke="#d97706" stroke-width="2" marker-end="url(#arr-amber)"/>
+
+      <!-- Oxaloacetate (OAA) (cytoplasm) -->
+      <rect x="360" y="272" width="132" height="44" rx="9" fill="#fef9c3" stroke="#d97706" stroke-width="1.5"/>
+      <text x="426" y="292" text-anchor="middle" font-size="13" fill="#92400e" font-weight="700" font-family="Segoe UI,sans-serif">Oxaloacetate</text>
+      <text x="426" y="309" text-anchor="middle" font-size="11" fill="#b45309" font-family="Segoe UI,sans-serif">(OAA) · TCA entry</text>
+
+      <!-- PC converts Pyruvate → OAA (curved arrow) -->
+      <path d="M 198 232 Q 310 250 358 290" fill="none" stroke="#0891b2" stroke-width="2" marker-end="url(#arr-teal)"/>
+      <text x="295" y="253" text-anchor="middle" font-size="11" fill="#0891b2" font-family="Segoe UI,sans-serif">Pyruvate → OAA</text>
+
+      <!-- OAA → Mitochondria (TCA cycle) arrow — crosses into mitochondria compartment -->
+      <line x1="426" y1="317" x2="440" y2="358" stroke="#15803d" stroke-width="2" marker-end="url(#arr-green)"/>
+      <text x="453" y="342" font-size="11" fill="#15803d" font-family="Segoe UI,sans-serif">enters TCA</text>
+
+      <!-- OUTCOME LABEL (below nucleus, in cytoplasm) -->
+      <rect x="18" y="500" width="212" height="38" rx="8" fill="#dcfce7" stroke="#16a34a" stroke-width="1.5"/>
+      <text x="124" y="516" text-anchor="middle" font-size="12" fill="#15803d" font-weight="700" font-family="Segoe UI,sans-serif">✅ Can Bypass Glutamine</text>
+      <text x="124" y="531" text-anchor="middle" font-size="11" fill="#166534" font-family="Segoe UI,sans-serif">Metabolically Flexible Cell</text>
+    </svg>
+  </div>
+
+  <!-- ═══════════════════════════════════════════════════════
+       PANEL B: FBXW7 mutant / glutamine addicted
+       ═══════════════════════════════════════════════════════ -->
+  <div class="panel">
+    <div class="panel-header mutant">
+      <span>Panel B — FBXW7 Mutated / Lost</span>
+      <span class="badge badge-mutant">Glutamine Addiction ✗</span>
+    </div>
+    <!--
+      Same compartment layout:
+        LEFT  → NUCLEUS (red dashed)  cx=170 cy=422 rx=148 ry=70
+        RIGHT → MITOCHONDRIA (green dashed)  cx=445 cy=422 rx=100 ry=60
+        Clearly SEPARATE compartments, ~27px gap between them.
+    -->
+    <svg viewBox="0 0 560 540" xmlns="http://www.w3.org/2000/svg" style="height:540px">
+      <defs>
+        <marker id="arr-green-b" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#15803d"/>
+        </marker>
+        <marker id="arr-red-b" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#dc2626"/>
+        </marker>
+        <marker id="arr-blue-b" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#2563eb"/>
+        </marker>
+        <marker id="arr-amber-b" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#d97706"/>
+        </marker>
+        <marker id="arr-purple-b" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#7c3aed"/>
+        </marker>
+        <marker id="arr-green-b2" markerWidth="8" markerHeight="6" refX="8" refY="3" orient="auto">
+          <polygon points="0 0, 8 3, 0 6" fill="#15803d"/>
+        </marker>
+      </defs>
+
+      <!-- ── CYTOPLASM label ── -->
+      <text x="16" y="22" font-size="13" fill="#cbd5e1" font-weight="700" font-family="Segoe UI,sans-serif" letter-spacing="1">CYTOPLASM</text>
+
+      <!-- ══════════════ NUCLEUS (red dashed, LEFT) ══════════════ -->
+      <ellipse cx="170" cy="422" rx="148" ry="70" fill="#fff1f2" stroke="#fca5a5" stroke-width="2" stroke-dasharray="7,3"/>
+      <!-- NUCLEUS zone label above ellipse -->
+      <text x="80" y="342" text-anchor="middle" font-size="14" fill="#dc2626" font-weight="800" font-family="Segoe UI,sans-serif">NUCLEUS</text>
+      <line x1="80" y1="345" x2="80" y2="351" stroke="#dc2626" stroke-width="1.5" marker-end="url(#arr-red-b)"/>
+      <!-- watermark inside ellipse -->
+      <text x="95" y="468" text-anchor="middle" font-size="13" fill="#fca5a5" font-weight="700" font-family="Segoe UI,sans-serif" opacity="0.9">— NUCLEAR ZONE —</text>
+
+      <!-- Repressor Complex label — inside nucleus at top -->
+      <text x="172" y="354" text-anchor="middle" font-size="11" fill="#7c3aed" font-weight="700" font-family="Segoe UI,sans-serif">★ Repressor Complex (Nuclear)</text>
+      <!-- MAX box — inside nucleus -->
+      <rect x="110" y="358" width="42" height="28" rx="5" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+      <text x="131" y="377" text-anchor="middle" font-size="12" fill="#6d28d9" font-weight="700" font-family="Segoe UI,sans-serif">MAX</text>
+      <!-- MNT box — inside nucleus -->
+      <rect x="156" y="358" width="42" height="28" rx="5" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+      <text x="177" y="377" text-anchor="middle" font-size="12" fill="#6d28d9" font-weight="700" font-family="Segoe UI,sans-serif">MNT</text>
+      <!-- SIN3A box — inside nucleus -->
+      <rect x="202" y="358" width="52" height="28" rx="5" fill="#ede9fe" stroke="#7c3aed" stroke-width="1.5"/>
+      <text x="228" y="377" text-anchor="middle" font-size="12" fill="#6d28d9" font-weight="700" font-family="Segoe UI,sans-serif">SIN3A</text>
+
+      <!-- PC Gene Promoter (SILENCED) — inside nucleus, below repressors -->
+      <rect x="100" y="392" width="145" height="58" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="2"/>
+      <text x="172" y="410" text-anchor="middle" font-size="13" fill="#991b1b" font-weight="700" font-family="Segoe UI,sans-serif">PC Gene Promoter</text>
+      <text x="172" y="427" text-anchor="middle" font-size="12" fill="#dc2626" font-family="Segoe UI,sans-serif">🔴 SILENCED</text>
+      <text x="172" y="443" text-anchor="middle" font-size="11" fill="#ef4444" font-weight="600" font-family="Segoe UI,sans-serif">★ Inside Nucleus</text>
+
+      <!-- No mRNA — blocked arrow going up out of nucleus -->
+      <line x1="172" y1="391" x2="172" y2="312" stroke="#dc2626" stroke-width="1.5" stroke-dasharray="4,3"/>
+      <text x="194" y="354" font-size="12" fill="#dc2626" font-family="Segoe UI,sans-serif">⛔ No mRNA</text>
+
+      <!-- ══════════════ MITOCHONDRIA (green dashed, RIGHT) ══════════════ -->
+      <!-- Clearly separate from nucleus; left edge at x=345, nucleus right edge at x=318 -->
+      <ellipse cx="445" cy="422" rx="100" ry="62" fill="#f0fdf4" stroke="#15803d" stroke-width="2" stroke-dasharray="7,3"/>
+      <!-- MITOCHONDRIA label above ellipse -->
+      <text x="445" y="348" text-anchor="middle" font-size="13" fill="#15803d" font-weight="800" font-family="Segoe UI,sans-serif">MITOCHONDRIA</text>
+      <line x1="445" y1="351" x2="445" y2="358" stroke="#15803d" stroke-width="1.5" marker-end="url(#arr-green-b)"/>
+      <!-- TCA Cycle label inside mitochondria -->
+      <text x="445" y="404" text-anchor="middle" font-size="14" fill="#14532d" font-weight="800" font-family="Segoe UI,sans-serif">TCA Cycle</text>
+      <text x="445" y="422" text-anchor="middle" font-size="12" fill="#15803d" font-family="Segoe UI,sans-serif">→ ATP · Biosynthesis</text>
+      <text x="445" y="440" text-anchor="middle" font-size="11" fill="#166534" font-family="Segoe UI,sans-serif">★ Inside Mitochondria</text>
+
+      <!-- ══════════════ CYTOPLASM MOLECULES ══════════════ -->
+
+      <!-- FBXW7 (mutated — X'd out) -->
+      <rect x="28" y="50" width="128" height="54" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="2" opacity="0.6"/>
+      <text x="92" y="72" text-anchor="middle" font-size="15" fill="#94a3b8" font-weight="800" font-family="Segoe UI,sans-serif">FBXW7</text>
+      <text x="92" y="91" text-anchor="middle" font-size="12" fill="#94a3b8" font-family="Segoe UI,sans-serif">❌ Mutated / Lost</text>
+      <line x1="36" y1="56" x2="148" y2="98" stroke="#dc2626" stroke-width="2.5" opacity="0.7"/>
+      <line x1="148" y1="56" x2="36" y2="98" stroke="#dc2626" stroke-width="2.5" opacity="0.7"/>
+
+      <!-- c-MYC (accumulates) -->
+      <rect x="195" y="42" width="128" height="62" rx="10" fill="#fef2f2" stroke="#dc2626" stroke-width="2.5"/>
+      <text x="259" y="66" text-anchor="middle" font-size="18" fill="#dc2626" font-weight="900" font-family="Segoe UI,sans-serif">c-MYC</text>
+      <text x="259" y="84" text-anchor="middle" font-size="12" fill="#dc2626" font-family="Segoe UI,sans-serif">⬆ Accumulates</text>
+      <text x="259" y="98" text-anchor="middle" font-size="11" fill="#b91c1c" font-family="Segoe UI,sans-serif">Not degraded!</text>
+
+      <!-- FBXW7 broken → c-MYC -->
+      <line x1="156" y1="74" x2="193" y2="74" stroke="#94a3b8" stroke-width="1.5" stroke-dasharray="3,3"/>
+      <text x="175" y="67" text-anchor="middle" font-size="11" fill="#94a3b8" font-family="Segoe UI,sans-serif">✗ no Ub</text>
+
+      <!-- c-MYC → recruits repressors INTO nucleus (arrow) -->
+      <path d="M 255 104 Q 230 230 172 352" fill="none" stroke="#7c3aed" stroke-width="2" stroke-dasharray="5,2" marker-end="url(#arr-purple-b)"/>
+      <text x="194" y="220" font-size="11" fill="#7c3aed" font-family="Segoe UI,sans-serif" transform="rotate(5,194,220)">Recruits repressors</text>
+      <text x="192" y="234" font-size="11" fill="#7c3aed" font-family="Segoe UI,sans-serif" transform="rotate(5,192,234)">to PC promoter</text>
+
+      <!-- PC Protein (not expressed — X'd out) -->
+      <rect x="50" y="198" width="145" height="58" rx="10" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.5" opacity="0.5"/>
+      <text x="122" y="220" text-anchor="middle" font-size="14" fill="#94a3b8" font-weight="800" font-family="Segoe UI,sans-serif">Pyruvate</text>
+      <text x="122" y="238" text-anchor="middle" font-size="14" fill="#94a3b8" font-weight="800" font-family="Segoe UI,sans-serif">Carboxylase (PC)</text>
+      <text x="122" y="253" text-anchor="middle" font-size="11" fill="#94a3b8" font-family="Segoe UI,sans-serif">❌ Not Expressed</text>
+      <line x1="58" y1="203" x2="187" y2="249" stroke="#dc2626" stroke-width="2" opacity="0.5"/>
+      <line x1="187" y1="203" x2="58" y2="249" stroke="#dc2626" stroke-width="2" opacity="0.5"/>
+
+      <!-- Biotin (present but no PC to activate) -->
+      <rect x="370" y="182" width="115" height="52" rx="10" fill="#f5f3ff" stroke="#c4b5fd" stroke-width="1.5" opacity="0.6"/>
+      <text x="427" y="204" text-anchor="middle" font-size="14" fill="#a78bfa" font-weight="800" font-family="Segoe UI,sans-serif">🟣 Biotin</text>
+      <text x="427" y="221" text-anchor="middle" font-size="11" fill="#a78bfa" font-family="Segoe UI,sans-serif">⛔ No PC to activate</text>
+
+      <!-- Pyruvate (blocked) -->
+      <rect x="50" y="290" width="115" height="44" rx="9" fill="#fef9c3" stroke="#d97706" stroke-width="1.5" opacity="0.6"/>
+      <text x="107" y="311" text-anchor="middle" font-size="13" fill="#b45309" font-weight="700" font-family="Segoe UI,sans-serif">Pyruvate</text>
+      <text x="107" y="327" text-anchor="middle" font-size="11" fill="#b45309" font-family="Segoe UI,sans-serif">⛔ Can't enter TCA</text>
+
+      <!-- GLUTAMINE (only fuel route) -->
+      <rect x="355" y="68" width="145" height="78" rx="10" fill="#fef3c7" stroke="#d97706" stroke-width="2.5"/>
+      <text x="427" y="93" text-anchor="middle" font-size="15" fill="#92400e" font-weight="800" font-family="Segoe UI,sans-serif">Glutamine</text>
+      <text x="427" y="112" text-anchor="middle" font-size="12" fill="#b45309" font-family="Segoe UI,sans-serif">⬆ ONLY fuel source</text>
+      <text x="427" y="130" text-anchor="middle" font-size="11" fill="#d97706" font-family="Segoe UI,sans-serif">GLS → α-KG → TCA</text>
+
+      <!-- GLS enzyme label -->
+      <rect x="458" y="176" width="58" height="32" rx="6" fill="#fff7ed" stroke="#d97706" stroke-width="1"/>
+      <text x="487" y="192" text-anchor="middle" font-size="11" fill="#92400e" font-weight="700" font-family="Segoe UI,sans-serif">GLS</text>
+      <text x="487" y="203" text-anchor="middle" font-size="10" fill="#b45309" font-family="Segoe UI,sans-serif">enzyme</text>
+
+      <!-- α-KG label -->
+      <rect x="458" y="226" width="58" height="32" rx="6" fill="#fff7ed" stroke="#d97706" stroke-width="1"/>
+      <text x="487" y="244" text-anchor="middle" font-size="11" fill="#92400e" font-weight="700" font-family="Segoe UI,sans-serif">α-KG</text>
+      <text x="487" y="253" text-anchor="middle" font-size="10" fill="#b45309" font-family="Segoe UI,sans-serif">→ TCA</text>
+
+      <!-- Glutamine → Mitochondria (TCA), long arrow ONLY ROUTE -->
+      <line x1="427" y1="147" x2="440" y2="358" stroke="#d97706" stroke-width="2.5" marker-end="url(#arr-amber-b)"/>
+      <text x="455" y="270" font-size="11" fill="#d97706" font-family="Segoe UI,sans-serif">ONLY ROUTE</text>
+      <text x="455" y="285" font-size="11" fill="#d97706" font-family="Segoe UI,sans-serif">to TCA</text>
+
+      <!-- OUTCOME LABEL -->
+      <rect x="18" y="500" width="230" height="38" rx="8" fill="#fee2e2" stroke="#dc2626" stroke-width="1.5"/>
+      <text x="133" y="516" text-anchor="middle" font-size="12" fill="#b91c1c" font-weight="700" font-family="Segoe UI,sans-serif">❌ Trapped: Glutamine Addiction</text>
+      <text x="133" y="531" text-anchor="middle" font-size="11" fill="#991b1b" font-family="Segoe UI,sans-serif">Vulnerable to Glutamine Starvation</text>
+    </svg>
+  </div>
+
+</div>
+
+<!-- MECHANISM STEPS -->
+<div class="mechanism">
+  <h3>🔬 Step-by-Step: How FBXW7 Loss Causes Glutamine Addiction</h3>
+  <div class="steps">
+    <div class="step">
+      <div class="step-num" style="background:#dcfce7; color:#15803d">1</div>
+      <p><strong>FBXW7 mutation:</strong> The tumor suppressor gene FBXW7 is lost or mutated — one of the most common tumor suppressor mutations in human cancers (colorectal, T-cell leukemia, cholangiocarcinoma, and others).</p>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:#fee2e2; color:#dc2626">2</div>
+      <p><strong>c-MYC accumulates:</strong> Without FBXW7, the oncogene c-MYC is no longer tagged for destruction by the proteasome. It builds up inside the cell to high levels, driving cancer growth programs.</p>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:#ede9fe; color:#7c3aed">3</div>
+      <p><strong>Repressors silence PC (in nucleus):</strong> High c-MYC recruits a complex of transcriptional repressors — <strong>MAX, MNT, and SIN3A</strong> — into the nucleus, where they bind the pyruvate carboxylase (PC) gene promoter and shut off PC expression.</p>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:#dbeafe; color:#1d4ed8">4</div>
+      <p><strong>Biotin's route is blocked:</strong> Without PC protein, the vitamin <strong>biotin</strong> has no enzyme to activate. The pathway from pyruvate → oxaloacetate → TCA cycle (in the mitochondria) is closed.</p>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:#fef3c7; color:#d97706">5</div>
+      <p><strong>Glutamine becomes essential:</strong> With the pyruvate anaplerosis route to the mitochondria closed, the cell <em>must</em> use glutamine (via GLS → α-ketoglutarate) as its only way to fuel the TCA cycle. It becomes <strong>glutamine addicted</strong>.</p>
+    </div>
+    <div class="step">
+      <div class="step-num" style="background:#f0fdf4; color:#15803d">6</div>
+      <p><strong>Therapeutic opportunity:</strong> FBXW7-mutant cancers that are glutamine-addicted may be specifically vulnerable to glutamine-starving therapies such as <strong>CB-839 (telaglenastat)</strong>, a GLS1 inhibitor in clinical trials.</p>
+    </div>
+  </div>
+</div>
+
+<!-- CITATION -->
+<div class="citation">
+  <p>Based on: Lisci M, Vericel F, Liu Y, et al. (2026). <em>Functional nutrient-genetic profiling reveals biotin and FBXW7 are essential to bypass glutamine addiction.</em> Molecular Cell, 86(5):901–916.e10. PMID: 41747732. <a href="https://doi.org/10.1016/j.molcel.2026.02.002" target="_blank">doi:10.1016/j.molcel.2026.02.002</a> · Retrieved from PubMed, National Library of Medicine.</p>
+</div>
+
+</body>
+</html>

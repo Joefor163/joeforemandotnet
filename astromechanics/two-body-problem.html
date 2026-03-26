@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Gravitational Two-Body Problem — Astromechanics</title>
+  <meta name="description" content="A complete derivation of the gravitational two-body problem — from Newton's law to Kepler's three empirical laws." />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.css" />
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/katex.min.js"></script>
+  <script defer src="https://cdnjs.cloudflare.com/ajax/libs/KaTeX/0.16.9/contrib/auto-render.min.js"
+    onload="renderMathInElement(document.body,{delimiters:[{left:'$$',right:'$$',display:true},{left:'$',right:'$',display:false}]})"></script>
+  <style>
+    :root{--bg:#0a0c12;--surface:#12151f;--surface2:#161a26;--border:#1e2330;--accent:#7c9ef8;--accent2:#a78bfa;--text:#e8eaf0;--muted:#7a7f96;--radius:12px;--font:'Segoe UI',system-ui,sans-serif;--max:740px;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.75;min-height:100vh;}
+    a{color:var(--accent);text-decoration:none;} a:hover{text-decoration:underline;}
+
+    /* NAV */
+    header{position:sticky;top:0;z-index:100;background:rgba(10,12,18,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+    nav{display:flex;align-items:center;justify-content:space-between;height:56px;max-width:1100px;margin:0 auto;padding:0 24px;}
+    .nav-back{font-size:.9rem;color:var(--muted);} .nav-back:hover{color:var(--text);text-decoration:none;}
+    .nav-brand{font-size:.9rem;color:var(--muted);} .nav-brand:hover{color:var(--text);text-decoration:none;}
+
+    /* LAYOUT */
+    article{max-width:var(--max);margin:0 auto;padding:56px 24px 96px;}
+
+    /* HEADER */
+    .art-tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);background:rgba(124,158,248,.1);border-radius:6px;padding:4px 12px;margin-bottom:18px;}
+    h1{font-size:clamp(1.8rem,4vw,2.6rem);font-weight:800;letter-spacing:-.03em;line-height:1.2;margin-bottom:12px;}
+    .subtitle{font-size:1rem;color:var(--muted);margin-bottom:44px;padding-bottom:40px;border-bottom:1px solid var(--border);}
+
+    /* TOC */
+    .toc{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:24px 28px;margin-bottom:48px;}
+    .toc-title{font-size:.75rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--muted);margin-bottom:14px;}
+    .toc ol{padding-left:1.2em;display:flex;flex-direction:column;gap:6px;}
+    .toc li a{font-size:.9rem;color:var(--text);} .toc li a:hover{color:var(--accent);}
+
+    /* PROSE */
+    h2{font-size:1.3rem;font-weight:700;margin:48px 0 16px;color:var(--text);padding-top:8px;border-top:1px solid var(--border);}
+    h3{font-size:1.1rem;font-weight:600;margin:32px 0 12px;color:var(--accent2);}
+    p{margin-bottom:18px;color:var(--text);}
+    p+p{margin-top:-4px;}
+
+    /* MATH BLOCKS */
+    .math-block{background:var(--surface2);border:1px solid var(--border);border-radius:8px;padding:20px 24px;margin:24px 0;overflow-x:auto;text-align:center;}
+    .eq-label{display:flex;align-items:center;justify-content:space-between;gap:16px;}
+    .eq-num{font-size:.8rem;color:var(--muted);flex-shrink:0;}
+
+    /* KEY RESULT BOX */
+    .key-result{background:linear-gradient(135deg,rgba(124,158,248,.08),rgba(167,139,250,.08));border:1px solid rgba(124,158,248,.25);border-radius:var(--radius);padding:22px 26px;margin:28px 0;}
+    .key-result-label{font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);margin-bottom:10px;}
+    .key-result p{color:var(--text);margin:0;}
+
+    /* ORBIT TABLE */
+    table{width:100%;border-collapse:collapse;margin:24px 0;font-size:.9rem;}
+    th{background:var(--surface);color:var(--muted);font-weight:600;font-size:.75rem;letter-spacing:.08em;text-transform:uppercase;padding:10px 16px;text-align:left;border-bottom:2px solid var(--border);}
+    td{padding:10px 16px;border-bottom:1px solid var(--border);color:var(--text);}
+    tr:last-child td{border-bottom:none;}
+
+    /* SUMMARY BOX */
+    .summary{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px 32px;margin-top:48px;}
+    .summary-title{font-size:.75rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);margin-bottom:20px;}
+    .summary dl{display:grid;grid-template-columns:auto 1fr;gap:6px 24px;}
+    .summary dt{color:var(--muted);font-size:.88rem;white-space:nowrap;}
+    .summary dd{color:var(--text);font-size:.88rem;}
+
+    footer{background:var(--surface);border-top:1px solid var(--border);padding:32px 0;text-align:center;font-size:.82rem;color:var(--muted);}
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a class="nav-back" href="/astromechanics/">← Astromechanics</a>
+    <a class="nav-brand" href="/">Joe Foreman</a>
+  </nav>
+</header>
+
+<article>
+  <span class="art-tag">Classical Mechanics</span>
+  <h1>The Gravitational Two-Body Problem</h1>
+  <p class="subtitle">A complete derivation — from Newton's law of gravitation to Kepler's three empirical laws, via the orbit equation, conic sections, and conservation laws.</p>
+
+  <nav class="toc" aria-label="Table of contents">
+    <div class="toc-title">Contents</div>
+    <ol>
+      <li><a href="#intro">Introduction</a></li>
+      <li><a href="#setup">Problem Setup</a></li>
+      <li><a href="#cm">Centre-of-Mass Reduction</a></li>
+      <li><a href="#reduced">The Reduced Mass &amp; One-Body Problem</a></li>
+      <li><a href="#conservation">Conservation Laws</a></li>
+      <li><a href="#orbit">Deriving the Orbit Equation</a></li>
+      <li><a href="#classification">Classification of Orbits</a></li>
+      <li><a href="#ellipses">Elliptical Orbits in Detail</a></li>
+      <li><a href="#kepler">Kepler's Three Laws</a></li>
+      <li><a href="#summary">Summary of Key Results</a></li>
+    </ol>
+  </nav>
+
+  <h2 id="intro">1. Introduction</h2>
+  <p>The gravitational two-body problem asks: given two point masses interacting solely through Newtonian gravity, what are their trajectories? This is one of the few problems in classical mechanics that admits an exact, closed-form solution.</p>
+  <p>The key insight is a mathematical sleight of hand: by switching to centre-of-mass and relative coordinates, the coupled six-dimensional system separates into (i) a trivially solved centre-of-mass translation and (ii) the motion of a single fictitious particle of <em>reduced mass</em> orbiting a fixed centre. The relative-motion problem then has two conserved quantities — energy and angular momentum — that together determine the complete orbit.</p>
+
+  <h2 id="setup">2. Problem Setup</h2>
+  <p>Consider two point masses $m_1$ and $m_2$ with position vectors $\mathbf{r}_1$ and $\mathbf{r}_2$ measured from an inertial origin. The gravitational force exerted by $m_2$ on $m_1$ is:</p>
+  <div class="math-block">
+    <div class="eq-label">
+      <div>$$\mathbf{F}_{12} = -\frac{G m_1 m_2}{|\mathbf{r}_1 - \mathbf{r}_2|^3}(\mathbf{r}_1 - \mathbf{r}_2)$$</div>
+      <span class="eq-num">(2.1)</span>
+    </div>
+  </div>
+  <p>By Newton's third law, $\mathbf{F}_{21} = -\mathbf{F}_{12}$. Writing $\mathbf{r} = \mathbf{r}_1 - \mathbf{r}_2$ for the relative separation, the equations of motion are:</p>
+  <div class="math-block">
+    <div class="eq-label"><div>$$m_1\ddot{\mathbf{r}}_1 = -\frac{G m_1 m_2\, \mathbf{r}}{|\mathbf{r}|^3}, \qquad m_2\ddot{\mathbf{r}}_2 = +\frac{G m_1 m_2\, \mathbf{r}}{|\mathbf{r}|^3}$$</div><span class="eq-num">(2.2–2.3)</span></div>
+  </div>
+
+  <h2 id="cm">3. Centre-of-Mass Reduction</h2>
+  <p>Define the total mass $M$ and the centre-of-mass (CM) position $\mathbf{R}$:</p>
+  <div class="math-block"><div class="eq-label"><div>$$M = m_1 + m_2, \qquad \mathbf{R} = \frac{m_1\mathbf{r}_1 + m_2\mathbf{r}_2}{M}$$</div><span class="eq-num">(3.1–3.2)</span></div></div>
+  <p>Adding the equations of motion gives $M\ddot{\mathbf{R}} = 0$, so:</p>
+  <div class="math-block"><div class="eq-label"><div>$$\mathbf{R}(t) = \mathbf{R}_0 + \mathbf{V}_0 t$$</div><span class="eq-num">(3.3)</span></div></div>
+  <p>The CM moves at constant velocity — it is an inertial frame. Working in the CM frame ($\mathbf{R} = 0$) decouples the problem: we only need to solve for the relative coordinate $\mathbf{r} = \mathbf{r}_1 - \mathbf{r}_2$.</p>
+
+  <h2 id="reduced">4. The Reduced Mass and the One-Body Problem</h2>
+  <p>Subtracting the scaled equations of motion yields:</p>
+  <div class="math-block"><div class="eq-label"><div>$$\ddot{\mathbf{r}} = -\frac{GM\,\hat{\mathbf{r}}}{r^2}$$</div><span class="eq-num">(4.1)</span></div></div>
+  <p>where $\hat{\mathbf{r}} = \mathbf{r}/r$ and $r = |\mathbf{r}|$. This is Newton's equation for a single particle orbiting a fixed mass $M$. Introducing the <em>reduced mass</em>:</p>
+  <div class="math-block"><div class="eq-label"><div>$$\mu = \frac{m_1 m_2}{m_1 + m_2} = \frac{m_1 m_2}{M}$$</div><span class="eq-num">(4.2)</span></div></div>
+  <div class="key-result">
+    <div class="key-result-label">Key Result</div>
+    <p>The two-body gravitational problem is exactly equivalent to a one-body problem: a fictitious particle of reduced mass $\mu = m_1 m_2/M$ moving in the central potential $V(r) = -G\mu M/r$, where $M = m_1 + m_2$.</p>
+  </div>
+
+  <h2 id="conservation">5. Conservation Laws</h2>
+  <h3>5.1 Angular Momentum</h3>
+  <p>Because the force is purely radial (central), the torque is zero and $\mathbf{L}$ is conserved:</p>
+  <div class="math-block"><div class="eq-label"><div>$$\mathbf{L} = \mu\,\mathbf{r} \times \dot{\mathbf{r}} = \text{const}$$</div><span class="eq-num">(5.1)</span></div></div>
+  <p>$\mathbf{L}$ is perpendicular to the plane of motion, so the orbit is confined to a fixed plane. In polar coordinates $(r, \theta)$:</p>
+  <div class="math-block"><div class="eq-label"><div>$$L = \mu r^2 \dot{\theta} \equiv \mu h \quad \text{(where } h \text{ is specific angular momentum)}$$</div><span class="eq-num">(5.2)</span></div></div>
+  <h3>5.2 Energy</h3>
+  <p>The total mechanical energy is also conserved:</p>
+  <div class="math-block"><div class="eq-label"><div>$$E = \frac{1}{2}\mu(\dot{r}^2 + r^2\dot{\theta}^2) - \frac{G\mu M}{r} = \text{const}$$</div><span class="eq-num">(5.3)</span></div></div>
+  <h3>5.3 Effective Potential</h3>
+  <p>Using (5.2) to eliminate $\dot{\theta}$, we can define the effective potential:</p>
+  <div class="math-block"><div class="eq-label"><div>$$V_\text{eff}(r) = \frac{L^2}{2\mu r^2} - \frac{G\mu M}{r}$$</div><span class="eq-num">(5.5)</span></div></div>
+  <p>The first term is the centrifugal barrier (repulsive) and the second is the gravitational well (attractive). Bound orbits require $E &lt; 0$; $E = 0$ corresponds to escape.</p>
+
+  <h2 id="orbit">6. Deriving the Orbit Equation</h2>
+  <p>To find $r(\theta)$ we use the <em>Binet substitution</em> $u \equiv 1/r$, giving:</p>
+  <div class="math-block"><div class="eq-label"><div>$$\frac{d^2 u}{d\theta^2} + u = \frac{G\mu^2 M}{L^2} \equiv \frac{1}{\ell}$$</div><span class="eq-num">(6.2)</span></div></div>
+  <p>where $\ell = L^2/(\mu^2 GM)$ is the <em>semi-latus rectum</em>. The general solution, choosing the periapsis as the reference direction, is:</p>
+  <div class="math-block">
+    <div>$$\boxed{r(\theta) = \frac{\ell}{1 + e\cos\theta}}$$</div>
+  </div>
+  <p>This is the polar equation of a <strong>conic section</strong> with focus at the origin. The eccentricity $e$ is determined by the energy and angular momentum:</p>
+  <div class="math-block"><div class="eq-label"><div>$$e = \sqrt{1 + \frac{2EL^2}{\mu^3 G^2 M^2}}$$</div><span class="eq-num">(6.5)</span></div></div>
+
+  <h2 id="classification">7. Classification of Orbits</h2>
+  <p>The shape of the orbit is entirely determined by the eccentricity $e$:</p>
+  <table>
+    <thead><tr><th>Eccentricity</th><th>Conic Section</th><th>Energy / Meaning</th></tr></thead>
+    <tbody>
+      <tr><td>$e = 0$</td><td>Circle</td><td>$E = E_\min$; perfectly circular orbit</td></tr>
+      <tr><td>$0 &lt; e &lt; 1$</td><td>Ellipse</td><td>$E &lt; 0$; bound orbit</td></tr>
+      <tr><td>$e = 1$</td><td>Parabola</td><td>$E = 0$; marginally unbound (escape)</td></tr>
+      <tr><td>$e &gt; 1$</td><td>Hyperbola</td><td>$E &gt; 0$; unbound, scattering orbit</td></tr>
+    </tbody>
+  </table>
+
+  <h2 id="ellipses">8. Elliptical Orbits in Detail &nbsp;$(0 \le e &lt; 1)$</h2>
+  <p>For bound orbits ($E &lt; 0$) the trajectory is an ellipse with one focus at the CM. The standard orbital parameters are:</p>
+  <div class="math-block">
+    <div>$$a = \frac{\ell}{1-e^2} = -\frac{G\mu M}{2E}, \quad b = a\sqrt{1-e^2} = \frac{L}{\sqrt{-2\mu E}}$$</div>
+  </div>
+  <div class="math-block">
+    <div>$$r_\min = a(1-e), \quad r_\max = a(1+e)$$</div>
+  </div>
+  <p>The orbital period follows from $dA/dt = L/(2\mu) = \text{const}$ (Kepler's second law) integrated over the full ellipse of area $\pi ab$:</p>
+  <div class="math-block"><div class="eq-label"><div>$$T^2 = \frac{4\pi^2}{GM}\,a^3$$</div><span class="eq-num">(8.2)</span></div></div>
+  <p>This is <strong>Kepler's Third Law</strong>: the square of the orbital period is proportional to the cube of the semi-major axis.</p>
+
+  <h2 id="kepler">9. Kepler's Three Laws</h2>
+  <p>The solution to the two-body problem reproduces and <em>explains</em> all three of Kepler's empirical laws:</p>
+  <div class="key-result">
+    <div class="key-result-label">First Law — The Law of Ellipses</div>
+    <p>Each planet moves along an ellipse with the Sun at one focus. This follows directly from the orbit equation (6.4) for $0 \le e &lt; 1$.</p>
+  </div>
+  <div class="key-result">
+    <div class="key-result-label">Second Law — The Law of Equal Areas</div>
+    <p>The line joining the planet to the Sun sweeps equal areas in equal times. This is a direct consequence of conservation of angular momentum: $dA/dt = L/(2\mu) = \text{const}$. It holds for <em>any</em> central force, not just gravity.</p>
+  </div>
+  <div class="key-result">
+    <div class="key-result-label">Third Law — The Law of Periods</div>
+    <p>$T^2 \propto a^3$, with proportionality constant $4\pi^2/(GM)$ where $M$ is the total mass. This provides a way to weigh astronomical systems.</p>
+  </div>
+
+  <h2 id="summary">10. Summary of Key Results</h2>
+  <div class="summary">
+    <div class="summary-title">Complete Solution — Quick Reference</div>
+    <dl>
+      <dt>Reduced mass</dt><dd>$\mu = m_1 m_2\,/\,(m_1 + m_2)$</dd>
+      <dt>Semi-latus rectum</dt><dd>$\ell = L^2\,/\,(\mu^2 GM)$</dd>
+      <dt>Eccentricity</dt><dd>$e = \sqrt{1 + 2EL^2\,/\,(\mu^3 G^2 M^2)}$</dd>
+      <dt>Orbit equation</dt><dd>$r(\theta) = \ell\,/\,(1 + e\cos\theta)$</dd>
+      <dt>Semi-major axis</dt><dd>$a = -G\mu M\,/\,(2E)$ &nbsp; [bound orbits]</dd>
+      <dt>Orbital period</dt><dd>$T^2 = (4\pi^2/GM)\cdot a^3$</dd>
+      <dt>Total energy</dt><dd>$E = \tfrac{1}{2}\mu\dot{r}^2 + L^2/(2\mu r^2) - G\mu M/r$</dd>
+    </dl>
+  </div>
+</article>
+
+<footer>
+  &copy; <span id="yr"></span> Joe Foreman. All rights reserved.
+  <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+</footer>
+
+</body>
+</html>

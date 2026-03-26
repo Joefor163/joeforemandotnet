@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Glutamine Addiction & Biotin — Cancer AI</title>
+  <meta name="description" content="Summary of Lisci et al. 2026 — how Biotin and FBXW7 let cancer cells escape glutamine addiction." />
+  <style>
+    :root{--bg:#0d0d0d;--surface:#161616;--card:#1c1c1c;--border:#2a2a2a;--accent:#4ade80;--accent2:#22d3ee;--purple:#a78bfa;--red:#f87171;--text:#e2e8f0;--muted:#718096;--radius:12px;--font:'Segoe UI',system-ui,sans-serif;--max:760px;}
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.75;min-height:100vh;}
+    a{color:var(--accent2);text-decoration:none;} a:hover{text-decoration:underline;}
+    header{position:sticky;top:0;z-index:100;background:rgba(13,13,13,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+    nav{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1100px;margin:0 auto;padding:0 24px;}
+    .nav-back{font-size:.88rem;color:var(--muted);} .nav-back:hover{color:var(--text);text-decoration:none;}
+    .nav-brand{font-size:.88rem;color:var(--muted);} .nav-brand:hover{color:var(--text);text-decoration:none;}
+    article{max-width:var(--max);margin:0 auto;padding:52px 24px 96px;}
+    .art-tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);background:rgba(74,222,128,.08);border-radius:6px;padding:4px 12px;margin-bottom:16px;}
+    h1{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:800;letter-spacing:-.03em;line-height:1.2;margin-bottom:10px;}
+    .citation{font-size:.82rem;color:var(--muted);margin-bottom:8px;}
+    .citation a{color:var(--muted);text-decoration:underline;}
+    .subtitle{font-size:1rem;color:var(--muted);margin-bottom:40px;padding-bottom:36px;border-bottom:1px solid var(--border);}
+    h2{font-size:1.2rem;font-weight:700;margin:44px 0 14px;padding-top:6px;border-top:1px solid var(--border);}
+    h3{font-size:1rem;font-weight:600;color:var(--accent2);margin:28px 0 10px;}
+    p{margin-bottom:16px;}
+
+    .callout{background:var(--surface);border:1px solid var(--border);border-left:3px solid var(--accent);border-radius:var(--radius);padding:18px 22px;margin:24px 0;}
+    .callout-label{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--accent);margin-bottom:8px;}
+    .callout p{margin:0;font-size:.92rem;}
+
+    .finding{background:var(--card);border:1px solid var(--border);border-radius:var(--radius);padding:22px 26px;margin:20px 0;}
+    .finding-num{font-size:.7rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--purple);margin-bottom:8px;}
+    .finding h3{color:var(--text);margin:0 0 10px;}
+    .finding p{font-size:.92rem;margin:0;}
+
+    .glossary{display:grid;grid-template-columns:auto 1fr;gap:0;margin:24px 0;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;}
+    .glossary dt{background:var(--surface);padding:10px 16px;font-size:.85rem;font-weight:600;color:var(--accent2);border-bottom:1px solid var(--border);}
+    .glossary dd{background:var(--card);padding:10px 16px;font-size:.85rem;color:var(--muted);border-bottom:1px solid var(--border);}
+    .glossary dt:last-of-type,.glossary dd:last-of-type{border-bottom:none;}
+
+    .figure-link{display:flex;align-items:center;gap:16px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 22px;margin:28px 0;transition:border-color .2s;}
+    .figure-link:hover{border-color:var(--accent2);text-decoration:none;}
+    .figure-link-icon{font-size:1.8rem;flex-shrink:0;}
+    .figure-link-title{font-size:.95rem;font-weight:600;color:var(--text);}
+    .figure-link-desc{font-size:.82rem;color:var(--muted);}
+    .figure-link-arrow{margin-left:auto;color:var(--accent2);}
+
+    .source{background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:18px 22px;margin-top:48px;font-size:.82rem;color:var(--muted);}
+    .source a{color:var(--muted);text-decoration:underline;}
+
+    footer{background:var(--surface);border-top:1px solid var(--border);padding:32px 0;text-align:center;font-size:.82rem;color:var(--muted);}
+  </style>
+</head>
+<body>
+
+<header>
+  <nav>
+    <a class="nav-back" href="/cancer-ai/">← Cancer &amp; AI</a>
+    <a class="nav-brand" href="/">Joe Foreman</a>
+  </nav>
+</header>
+
+<article>
+  <span class="art-tag">Paper Summary</span>
+  <h1>Biotin &amp; FBXW7: How Cancer Escapes Glutamine Addiction</h1>
+  <p class="citation">Lisci M, Vericel F, Liu Y, Gallart-Ayala H, Ivanisevic J, Skinner OS, Jourdain AA &bull; <em>Molecular Cell</em>, 2026; 86(5):901–916 &bull; <a href="https://doi.org/10.1016/j.molcel.2026.02.002" target="_blank">DOI: 10.1016/j.molcel.2026.02.002</a></p>
+  <p class="subtitle">Many cancers are addicted to the amino acid glutamine. This paper asked: what allows some cells to break free? The answer involves Vitamin B7 and one of the most commonly mutated tumor suppressors in human cancer.</p>
+
+  <h2>Overview</h2>
+  <p>Through a large-scale genetic and nutritional screen — what the authors call "functional nutrient-genetic profiling" — the researchers discovered two key players:</p>
+  <div class="callout">
+    <div class="callout-label">Key Discovery</div>
+    <p><strong>Biotin (Vitamin B7)</strong> — when present, activates a metabolic escape route that lets cells survive without glutamine.<br/><br/>
+    <strong>FBXW7</strong> — a tumor suppressor that keeps that escape route open. When FBXW7 is mutated (common in many cancers), the escape route is blocked, locking those cells into glutamine addiction.</p>
+  </div>
+
+  <h2>Background: Why Glutamine Addiction Matters</h2>
+  <p>Normal cells are metabolically flexible — they can switch between nutrients depending on availability. Cancer cells often lose this flexibility and become dependent on specific fuels. Glutamine addiction is well-known: many tumors consume glutamine at far higher rates than normal cells, using it to fuel growth, build proteins, and generate energy.</p>
+  <p>This dependency is potentially exploitable as a therapy — starve a cancer of glutamine and you might stop its growth. But cancers can develop workarounds. Understanding those workarounds is critical for designing effective therapies.</p>
+
+  <h2>What the Researchers Did</h2>
+  <p>The team used three complementary approaches together:</p>
+  <p><strong>Metabolic tracers</strong> — molecules labeled with carbon-13 to track exactly how carbon flows through metabolic pathways.<br/>
+  <strong>Nutrient supplementation</strong> — systematically testing which nutrients could rescue cells from glutamine deprivation.<br/>
+  <strong>Genome-wide CRISPR-Cas9 screening</strong> — knocking out every gene, one at a time, in glutamine-deprived conditions to identify essential survival genes.</p>
+
+  <h2>Key Findings</h2>
+  <div class="finding">
+    <div class="finding-num">Finding 1</div>
+    <h3>Biotin activates the escape route</h3>
+    <p>When cells are deprived of glutamine, supplementing with biotin allows them to survive. Biotin activates <strong>pyruvate carboxylase (PC)</strong>, which converts pyruvate into oxaloacetate — replenishing the TCA cycle without needing glutamine. Biotin-powered PC is an alternative on-ramp to the TCA cycle that bypasses the glutamine route entirely.</p>
+  </div>
+  <div class="finding">
+    <div class="finding-num">Finding 2</div>
+    <h3>FBXW7 keeps pyruvate carboxylase active</h3>
+    <p>FBXW7 is a tumor suppressor that degrades the oncogene c-MYC. When FBXW7 is functional, c-MYC is kept low, and the PC gene is expressed normally. When FBXW7 is mutated or lost, c-MYC accumulates — and high c-MYC recruits a transcriptional repressor complex (MAX, MNT, SIN3A) to the PC gene promoter, silencing it. Without PC, cells cannot bypass glutamine dependence.</p>
+  </div>
+  <div class="finding">
+    <div class="finding-num">Finding 3</div>
+    <h3>Clinical relevance for FBXW7-mutant cancers</h3>
+    <p>FBXW7 is one of the most commonly mutated tumor suppressors in human cancer — including colorectal cancer, T-cell leukemia, and cholangiocarcinoma. These cancers, with silenced PC, should be most vulnerable to glutamine-targeting therapies such as CB-839/telaglenastat (currently in clinical trials).</p>
+  </div>
+
+  <a class="figure-link" href="fbxw7-biotin-figure.html">
+    <span class="figure-link-icon">🔬</span>
+    <div>
+      <div class="figure-link-title">FBXW7 · Biotin · c-MYC Pathway Figure</div>
+      <p class="figure-link-desc">Interactive diagram of the molecular mechanism — how FBXW7 loss blocks the biotin-powered TCA bypass route.</p>
+    </div>
+    <span class="figure-link-arrow">→</span>
+  </a>
+
+  <h2>Why This Matters</h2>
+  <p><strong>Mechanism:</strong> A detailed molecular explanation for glutamine addiction — the FBXW7 → c-MYC → PC axis is a new piece of the puzzle.</p>
+  <p><strong>Biomarker:</strong> FBXW7 mutation status may predict which tumors are most sensitive to glutamine-targeting therapies.</p>
+  <p><strong>New role for biotin:</strong> Generally considered just a B vitamin, biotin turns out to play an underappreciated role in cancer metabolic flexibility.</p>
+  <p><strong>Method:</strong> "Functional nutrient-genetic profiling" — combining nutrient screens with genome-wide CRISPR screens — is a powerful strategy others can apply broadly.</p>
+
+  <h2>Glossary of Key Terms</h2>
+  <dl class="glossary">
+    <dt>Glutamine addiction</dt><dd>Dependence of many cancer cells on glutamine as a primary fuel — a metabolic vulnerability potentially exploitable as therapy.</dd>
+    <dt>Pyruvate carboxylase (PC)</dt><dd>An enzyme that converts pyruvate to oxaloacetate, replenishing the TCA cycle. Requires biotin to function.</dd>
+    <dt>Anaplerosis</dt><dd>Reactions that replenish TCA cycle intermediates drained during rapid cell growth. Glutamine and pyruvate are major anaplerotic substrates.</dd>
+    <dt>FBXW7</dt><dd>A tumor suppressor E3 ubiquitin ligase that tags oncogenes (especially c-MYC) for destruction. Lost in many cancers.</dd>
+    <dt>c-MYC</dt><dd>A powerful oncogene and transcription factor. Normally kept in check by FBXW7; drives glutamine uptake when overactive.</dd>
+    <dt>MAX / MNT / SIN3A</dt><dd>A gene-silencing complex recruited by c-MYC to the PC gene promoter, switching it off when FBXW7 is lost.</dd>
+    <dt>CRISPR-Cas9 screening</dt><dd>Genome-wide technique knocking out every gene across millions of cells to identify genes essential for survival under specific conditions.</dd>
+  </dl>
+
+  <div class="source">
+    <strong>Source:</strong> Lisci M et al. (2026). Functional nutrient-genetic profiling reveals biotin and FBXW7 are essential to bypass glutamine addiction. <em>Molecular Cell</em>, 86(5):901–916.e10. PMID: 41747732. <a href="https://doi.org/10.1016/j.molcel.2026.02.002" target="_blank">https://doi.org/10.1016/j.molcel.2026.02.002</a>
+  </div>
+</article>
+
+<footer>&copy; <span id="yr"></span> Joe Foreman. All rights reserved.<script>document.getElementById('yr').textContent=new Date().getFullYear();</script></footer>
+</body>
+</html>

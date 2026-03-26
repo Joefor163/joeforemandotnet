@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Astromechanics — Joe Foreman</title>
+  <meta name="description" content="Classical mechanics and orbital dynamics — derivations, proofs, and the mathematics of gravity." />
+  <style>
+    :root { --bg:#0a0c12; --surface:#12151f; --border:#1e2330; --accent:#7c9ef8; --text:#e8eaf0; --muted:#7a7f96; --radius:12px; --font:'Segoe UI',system-ui,sans-serif; }
+    *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
+    body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.65;min-height:100vh;}
+    a{color:var(--accent);text-decoration:none;} a:hover{text-decoration:underline;}
+    header{position:sticky;top:0;z-index:100;background:rgba(10,12,18,0.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+    nav{display:flex;align-items:center;justify-content:space-between;height:56px;max-width:1100px;margin:0 auto;padding:0 24px;}
+    .nav-back{font-size:.9rem;color:var(--muted);transition:color .2s;} .nav-back:hover{color:var(--text);text-decoration:none;}
+    .nav-title{font-size:1rem;font-weight:700;color:var(--text);}
+    .page{max-width:860px;margin:0 auto;padding:64px 24px 96px;}
+    .page-tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);background:rgba(124,158,248,.1);border-radius:6px;padding:4px 12px;margin-bottom:20px;}
+    .page-title{font-size:clamp(2rem,5vw,2.8rem);font-weight:800;letter-spacing:-.03em;line-height:1.2;margin-bottom:14px;}
+    .page-subtitle{font-size:1.05rem;color:var(--muted);margin-bottom:52px;padding-bottom:48px;border-bottom:1px solid var(--border);}
+    .articles{display:flex;flex-direction:column;gap:20px;}
+    .article-card{display:flex;align-items:center;gap:24px;background:var(--surface);border:1px solid var(--border);border-radius:var(--radius);padding:28px 32px;transition:border-color .2s,transform .2s;}
+    .article-card:hover{border-color:var(--accent);transform:translateY(-2px);text-decoration:none;}
+    .article-icon{font-size:2rem;flex-shrink:0;}
+    .article-title{font-size:1.15rem;font-weight:700;color:var(--text);margin-bottom:6px;}
+    .article-desc{font-size:.9rem;color:var(--muted);}
+    .article-arrow{margin-left:auto;font-size:1.2rem;color:var(--accent);flex-shrink:0;}
+    footer{background:var(--surface);border-top:1px solid var(--border);padding:32px 0;text-align:center;font-size:.82rem;color:var(--muted);}
+    footer a{color:var(--muted);} footer a:hover{color:var(--text);text-decoration:none;}
+  </style>
+</head>
+<body>
+  <header>
+    <nav>
+      <a class="nav-back" href="/">← Joe Foreman</a>
+      <span class="nav-title">Astromechanics</span>
+    </nav>
+  </header>
+  <main class="page">
+    <span class="page-tag">Classical Mechanics</span>
+    <h1 class="page-title">Astromechanics</h1>
+    <p class="page-subtitle">Orbital dynamics and the mathematics of gravity — exact derivations from first principles, with a focus on the beautiful structure of classical mechanics.</p>
+    <div class="articles">
+      <a class="article-card" href="two-body-problem.html">
+        <span class="article-icon">🪐</span>
+        <div>
+          <div class="article-title">The Gravitational Two-Body Problem</div>
+          <p class="article-desc">A complete derivation from Newton's law to Kepler's three laws — including the orbit equation, conic sections, and conservation of energy and angular momentum.</p>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
+    </div>
+  </main>
+  <footer>&copy; <span id="yr"></span> Joe Foreman. All rights reserved.<script>document.getElementById('yr').textContent=new Date().getFullYear();</script></footer>
+</body>
+</html>
