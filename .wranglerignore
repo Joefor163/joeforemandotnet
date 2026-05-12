@@ -1,6 +1,7 @@
 .git
 .github
 .claude
+.auto-push
 .DS_Store
 *.docx
 _template-topic-site
