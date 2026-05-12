@@ -5,15 +5,37 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Glutamine Addiction & Biotin — Cancer AI</title>
   <meta name="description" content="Summary of Lisci et al. 2026 — how Biotin and FBXW7 let cancer cells escape glutamine addiction." />
+
+  <!-- Pre-paint theme init (must stay inline to avoid FOUC) -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = stored || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/assets/theme.css" />
+
   <style>
-    :root{--bg:#0d0d0d;--surface:#161616;--card:#1c1c1c;--border:#2a2a2a;--accent:#4ade80;--accent2:#22d3ee;--purple:#a78bfa;--red:#f87171;--text:#e2e8f0;--muted:#718096;--radius:12px;--font:'Segoe UI',system-ui,sans-serif;--max:760px;}
+    /* Light (day) — default */
+    :root{--bg:#ffffff;--surface:#f6f7fb;--card:#ffffff;--border:#e3e6ee;--accent:#16a34a;--accent2:#0891b2;--purple:#7c3aed;--red:#dc2626;--text:#14161d;--muted:#5b6072;--radius:12px;--font:'Segoe UI',system-ui,sans-serif;--max:760px;--header-bg:rgba(255,255,255,0.9);--color-muted:#5b6072;--color-text:#14161d;--color-border:#e3e6ee;}
+    /* Dark (night) override */
+    :root[data-theme="dark"]{--bg:#0d0d0d;--surface:#161616;--card:#1c1c1c;--border:#2a2a2a;--accent:#4ade80;--accent2:#22d3ee;--purple:#a78bfa;--red:#f87171;--text:#e2e8f0;--muted:#718096;--header-bg:rgba(13,13,13,.9);--color-muted:#718096;--color-text:#e2e8f0;--color-border:#2a2a2a;}
     *,*::before,*::after{box-sizing:border-box;margin:0;padding:0;}
     body{background:var(--bg);color:var(--text);font-family:var(--font);line-height:1.75;min-height:100vh;}
     a{color:var(--accent2);text-decoration:none;} a:hover{text-decoration:underline;}
-    header{position:sticky;top:0;z-index:100;background:rgba(13,13,13,.9);backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
+    header{position:sticky;top:0;z-index:100;background:var(--header-bg);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border-bottom:1px solid var(--border);}
     nav{display:flex;align-items:center;justify-content:space-between;height:52px;max-width:1100px;margin:0 auto;padding:0 24px;}
     .nav-back{font-size:.88rem;color:var(--muted);} .nav-back:hover{color:var(--text);text-decoration:none;}
     .nav-brand{font-size:.88rem;color:var(--muted);} .nav-brand:hover{color:var(--text);text-decoration:none;}
+    .nav-right{display:flex;align-items:center;gap:14px;}
     article{max-width:var(--max);margin:0 auto;padding:52px 24px 96px;}
     .art-tag{display:inline-block;font-size:.7rem;font-weight:700;letter-spacing:.12em;text-transform:uppercase;color:var(--accent);background:rgba(74,222,128,.08);border-radius:6px;padding:4px 12px;margin-bottom:16px;}
     h1{font-size:clamp(1.7rem,4vw,2.4rem);font-weight:800;letter-spacing:-.03em;line-height:1.2;margin-bottom:10px;}
@@ -56,7 +78,21 @@
 <header>
   <nav>
     <a class="nav-back" href="/cancer-ai/">← Cancer &amp; AI</a>
-    <a class="nav-brand" href="/">Joe Foreman</a>
+    <div class="nav-right">
+      <a class="nav-brand" href="/">Joe Foreman</a>
+      <button id="theme-toggle" class="theme-toggle" type="button"
+              aria-label="Toggle day / night mode" title="Toggle day / night mode">
+        <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/>
+        </svg>
+        <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+             stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+          <circle cx="12" cy="12" r="4"/>
+          <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+        </svg>
+      </button>
+    </div>
   </nav>
 </header>
 
@@ -142,5 +178,7 @@
 </article>
 
 <footer>&copy; <span id="yr"></span> Joe Foreman. All rights reserved.<script>document.getElementById('yr').textContent=new Date().getFullYear();</script></footer>
+
+<script src="/assets/theme.js" defer></script>
 </body>
 </html>

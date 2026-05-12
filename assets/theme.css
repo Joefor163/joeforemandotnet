@@ -1,0 +1,47 @@
+/* ─────────────────────────────────────────────────────────────────────────
+   theme.css — site-wide day/night toggle UI + behavior hooks
+   Loaded by every page. Per-page palettes live in each page's own <style>
+   under :root (light/default) and :root[data-theme="dark"] (dark).
+───────────────────────────────────────────────────────────────────────── */
+
+/* Tell the UA which mode we're in so form controls/scrollbars match. */
+:root                       { color-scheme: light; }
+:root[data-theme="dark"]    { color-scheme: dark; }
+
+/* Smooth bg/text transitions when toggling. */
+html, body {
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+/* ── Toggle button ─────────────────────────────────────────────────────── */
+.theme-toggle {
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: var(--color-muted, currentColor);
+  border: 1px solid var(--color-border, currentColor);
+  border-radius: 999px;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: color 0.2s, border-color 0.2s, background-color 0.2s;
+}
+
+.theme-toggle:hover {
+  color: var(--color-text, currentColor);
+  border-color: var(--color-text, currentColor);
+}
+
+.theme-toggle svg {
+  width: 16px;
+  height: 16px;
+}
+
+/* Moon visible in light mode (click → dark). Sun visible in dark mode. */
+.theme-toggle .icon-sun  { display: none; }
+.theme-toggle .icon-moon { display: inline; }
+:root[data-theme="dark"] .theme-toggle .icon-sun  { display: inline; }
+:root[data-theme="dark"] .theme-toggle .icon-moon { display: none; }

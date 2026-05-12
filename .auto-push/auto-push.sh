@@ -2,12 +2,13 @@
 # ─────────────────────────────────────────────────────────────────────────────
 # auto-push.sh — Joe Foreman's site auto-push daemon
 #
-# Runs every few minutes via launchd. Detects any uncommitted changes in the
-# git repo, commits them automatically, and pushes to GitHub — which triggers
-# the Cloudflare Pages deploy workflow.
+# Triggered by launchd's WatchPaths whenever any file inside the
+# joeforemandotnet repo is added, changed, or removed. Detects the
+# uncommitted changes, commits them automatically, and pushes to GitHub —
+# which triggers the Cloudflare Pages deploy workflow.
 #
-# Claude makes changes → this script notices → pushes → GitHub Action deploys.
-# Joe doesn't need to do anything.
+# File dropped/edited inside joeforemandotnet → this script wakes →
+# commits → pushes → GitHub Action deploys. No other folder is ever touched.
 # ─────────────────────────────────────────────────────────────────────────────
 
 REPO_DIR="$(cd "$(dirname "$0")/.." && pwd)"
@@ -28,6 +29,17 @@ touch "$LOCK_FILE"
 trap 'rm -f "$LOCK_FILE"' EXIT
 
 cd "$REPO_DIR" || { log "ERROR: Cannot cd to $REPO_DIR"; exit 1; }
+
+# Clear any stale git lock left behind by a crashed/interrupted git command.
+# A real running git process holds the lock for milliseconds — anything older
+# than 30 seconds is leftover junk and safe to remove.
+if [ -f ".git/index.lock" ]; then
+  LOCK_AGE=$(( $(date +%s) - $(stat -f '%m' ".git/index.lock" 2>/dev/null || echo 0) ))
+  if [ "$LOCK_AGE" -gt 30 ]; then
+    log "Removing stale .git/index.lock (age=${LOCK_AGE}s)."
+    rm -f ".git/index.lock"
+  fi
+fi
 
 # Check if there are any uncommitted changes (staged, unstaged, or untracked)
 if git diff --quiet HEAD 2>/dev/null && [ -z "$(git status --porcelain 2>/dev/null)" ]; then

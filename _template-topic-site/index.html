@@ -6,12 +6,56 @@
   <title>Topic Title — Joe Foreman</title>
   <meta name="description" content="Description of this topic site." />
 
+  <!-- ─────────────────────────────────────────────────────
+       THEME SYSTEM — three pieces that need to be on EVERY
+       page for the day/night toggle to work correctly:
+         1. Inline pre-paint <script> (this avoids the
+            flash-of-wrong-theme on initial load)
+         2. <link rel="stylesheet" href="/assets/theme.css">
+            (toggle button styling + color-scheme rules)
+         3. <button id="theme-toggle" ...>  (in <nav>)
+         4. <script src="/assets/theme.js" defer>  (just before
+            </body> — wires up the click handler)
+       Plus: a light :root palette and a dark
+       :root[data-theme="dark"] override in this page's <style>.
+  ───────────────────────────────────────────────────── -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = stored || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/assets/theme.css" />
+
   <!-- Cloudflare Web Analytics (same token as homepage) -->
   <!-- <script defer src='https://static.cloudflareinsights.com/beacon.min.js'
     data-cf-beacon='{"token": "PASTE_YOUR_TOKEN_HERE"}'></script> -->
 
   <style>
+    /* Light (day) — default */
     :root {
+      --color-bg:        #ffffff;
+      --color-surface:   #f6f7fb;
+      --color-border:    #e3e6ee;
+      --color-accent:    #2f5fe0;
+      --color-accent-2:  #6a3fb8;
+      --color-text:      #14161d;
+      --color-muted:     #5b6072;
+      --color-bg-translucent: rgba(255, 255, 255, 0.88);
+      --radius:          12px;
+      --max-width:       780px;
+      --font-sans:       'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+    /* Dark (night) override */
+    :root[data-theme="dark"] {
       --color-bg:        #0f1117;
       --color-surface:   #1a1d27;
       --color-border:    #2a2d3a;
@@ -19,9 +63,7 @@
       --color-accent-2:  #7c5cbf;
       --color-text:      #e8eaf0;
       --color-muted:     #8b8fa8;
-      --radius:          12px;
-      --max-width:       780px;
-      --font-sans:       'Segoe UI', system-ui, -apple-system, sans-serif;
+      --color-bg-translucent: rgba(15, 17, 23, 0.88);
     }
 
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -42,10 +84,13 @@
       position: sticky;
       top: 0;
       z-index: 100;
-      background: rgba(15, 17, 23, 0.85);
+      background: var(--color-bg-translucent);
       backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
       border-bottom: 1px solid var(--color-border);
     }
+
+    .nav-right { display: flex; align-items: center; gap: 14px; }
 
     nav {
       display: flex;
@@ -200,7 +245,21 @@
   <header>
     <nav>
       <a class="nav-back" href="/">← Joe Foreman</a>
-      <span class="nav-logo">Topic Title</span>
+      <div class="nav-right">
+        <span class="nav-logo">Topic Title</span>
+        <button id="theme-toggle" class="theme-toggle" type="button"
+                aria-label="Toggle day / night mode" title="Toggle day / night mode">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/>
+          </svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+               stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+        </button>
+      </div>
     </nav>
   </header>
 
@@ -246,6 +305,8 @@
   <footer>
     &copy; <script>document.write(new Date().getFullYear())</script> Joe Foreman. All rights reserved.
   </footer>
+
+  <script src="/assets/theme.js" defer></script>
 
 </body>
 </html>

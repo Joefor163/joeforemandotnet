@@ -4,7 +4,7 @@
 <!--
   launchd agent — Joe Foreman site auto-push
   Installed to: ~/Library/LaunchAgents/com.joeforeman.autopush.plist
-  Runs auto-push.sh every 2 minutes.
+  Wakes auto-push.sh whenever a file inside the joeforemandotnet repo changes.
 -->
 <plist version="1.0">
 <dict>
@@ -17,17 +17,33 @@
     <string>REPO_PATH/.auto-push/auto-push.sh</string>
   </array>
 
-  <!-- Run every 120 seconds (2 minutes) -->
-  <key>StartInterval</key>
-  <integer>120</integer>
+  <!--
+    Trigger ONLY on changes inside the joeforemandotnet repo.
+    No polling, no schedule — launchd wakes the script the moment
+    anything in the folder is added, modified, or removed.
+  -->
+  <key>WatchPaths</key>
+  <array>
+    <string>REPO_PATH</string>
+  </array>
 
-  <!-- Start automatically when the user logs in -->
+  <!--
+    Also run once at login to catch any changes that happened while
+    the daemon was offline (e.g. edits made on another machine and
+    pulled in, or files added while logged out).
+  -->
   <key>RunAtLoad</key>
   <true/>
 
-  <!-- Keep alive if it crashes -->
+  <!-- Don't keep alive — the script should exit and wait for the
+       next file-change event. -->
   <key>KeepAlive</key>
   <false/>
+
+  <!-- Coalesce rapid bursts of file changes into a single run.
+       (e.g. saving many files at once won't queue 10 runs.) -->
+  <key>ThrottleInterval</key>
+  <integer>10</integer>
 
   <key>StandardOutPath</key>
   <string>HOME_PATH/Library/Logs/joeforeman-auto-push.log</string>
@@ -35,7 +51,6 @@
   <key>StandardErrorPath</key>
   <string>HOME_PATH/Library/Logs/joeforeman-auto-push.log</string>
 
-  <!-- Only run when on AC power or when battery is sufficient -->
   <key>ProcessType</key>
   <string>Background</string>
 </dict>
