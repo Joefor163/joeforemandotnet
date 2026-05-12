@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN"
+  "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<!--
+  launchd agent — Joe Foreman site auto-push
+  Installed to: ~/Library/LaunchAgents/com.joeforeman.autopush.plist
+  Runs auto-push.sh every 2 minutes.
+-->
+<plist version="1.0">
+<dict>
+  <key>Label</key>
+  <string>com.joeforeman.autopush</string>
+
+  <key>ProgramArguments</key>
+  <array>
+    <string>/bin/bash</string>
+    <string>REPO_PATH/.auto-push/auto-push.sh</string>
+  </array>
+
+  <!-- Run every 120 seconds (2 minutes) -->
+  <key>StartInterval</key>
+  <integer>120</integer>
+
+  <!-- Start automatically when the user logs in -->
+  <key>RunAtLoad</key>
+  <true/>
+
+  <!-- Keep alive if it crashes -->
+  <key>KeepAlive</key>
+  <false/>
+
+  <key>StandardOutPath</key>
+  <string>HOME_PATH/Library/Logs/joeforeman-auto-push.log</string>
+
+  <key>StandardErrorPath</key>
+  <string>HOME_PATH/Library/Logs/joeforeman-auto-push.log</string>
+
+  <!-- Only run when on AC power or when battery is sufficient -->
+  <key>ProcessType</key>
+  <string>Background</string>
+</dict>
+</plist>
