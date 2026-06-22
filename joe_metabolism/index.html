@@ -1,0 +1,174 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Health &amp; Metabolism — Joe Foreman</title>
+  <meta name="description" content="Mechanistic reviews on nutrition, immunology, and biochemistry — including a deep-dive into Vitamin D's role in infection susceptibility." />
+
+  <!-- Pre-paint theme init (must stay inline to avoid FOUC) -->
+  <script>
+    (function () {
+      try {
+        var stored = localStorage.getItem('theme');
+        var prefersDark = window.matchMedia &&
+          window.matchMedia('(prefers-color-scheme: dark)').matches;
+        var theme = stored || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+      } catch (e) {
+        document.documentElement.setAttribute('data-theme', 'light');
+      }
+    })();
+  </script>
+
+  <link rel="stylesheet" href="/assets/theme.css" />
+
+  <style>
+    /* Light (day) — default palette */
+    :root {
+      --color-bg:        #ffffff;
+      --color-surface:   #f6f7fb;
+      --color-border:    #e3e6ee;
+      --color-accent:    #2f5fe0;
+      --color-text:      #14161d;
+      --color-muted:     #5b6072;
+      --color-bg-translucent: rgba(255, 255, 255, 0.88);
+      --radius:          12px;
+      --max-width:       860px;
+      --font-sans:       'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    /* Dark (night) override */
+    :root[data-theme="dark"] {
+      --color-bg:        #0f1117;
+      --color-surface:   #1a1d27;
+      --color-border:    #2a2d3a;
+      --color-accent:    #4f7ef8;
+      --color-text:      #e8eaf0;
+      --color-muted:     #8b8fa8;
+      --color-bg-translucent: rgba(15, 17, 23, 0.88);
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    body { background: var(--color-bg); color: var(--color-text); font-family: var(--font-sans); line-height: 1.65; min-height: 100vh; }
+    a { color: var(--color-accent); text-decoration: none; }
+    a:hover { text-decoration: underline; }
+
+    header {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--color-bg-translucent);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--color-border);
+    }
+    nav {
+      display: flex; align-items: center; justify-content: space-between;
+      height: 56px; max-width: 1100px; margin: 0 auto; padding: 0 24px;
+    }
+    .nav-back { font-size: 0.9rem; color: var(--color-muted); transition: color 0.2s; }
+    .nav-back:hover { color: var(--color-text); text-decoration: none; }
+    .nav-title { font-size: 1rem; font-weight: 700; color: var(--color-text); }
+    .nav-right { display: flex; align-items: center; gap: 16px; }
+
+    .page { max-width: var(--max-width); margin: 0 auto; padding: 64px 24px 96px; }
+
+    .page-tag {
+      display: inline-block; font-size: 0.7rem; font-weight: 700;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: #d97706; background: rgba(217,119,6,0.1);
+      border: 1px solid rgba(217,119,6,0.3);
+      border-radius: 6px; padding: 4px 12px; margin-bottom: 20px;
+    }
+    :root[data-theme="dark"] .page-tag { background: rgba(217,119,6,0.15); }
+    .page-title {
+      font-size: clamp(2rem, 5vw, 2.8rem); font-weight: 800;
+      letter-spacing: -0.03em; line-height: 1.2; margin-bottom: 14px;
+    }
+    .page-subtitle {
+      font-size: 1.05rem; color: var(--color-muted);
+      margin-bottom: 52px; padding-bottom: 48px;
+      border-bottom: 1px solid var(--color-border);
+    }
+
+    .articles { display: flex; flex-direction: column; gap: 20px; }
+
+    .article-card {
+      display: flex; align-items: center; gap: 24px;
+      background: var(--color-surface); border: 1px solid var(--color-border);
+      border-radius: var(--radius); padding: 28px 32px;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+    .article-card:hover { border-color: var(--color-accent); transform: translateY(-2px); text-decoration: none; }
+
+    .article-icon { font-size: 2rem; flex-shrink: 0; }
+
+    .article-body {}
+    .article-title { font-size: 1.15rem; font-weight: 700; color: var(--color-text); margin-bottom: 6px; }
+    .article-desc { font-size: 0.9rem; color: var(--color-muted); }
+    .article-arrow { margin-left: auto; font-size: 1.2rem; color: var(--color-accent); flex-shrink: 0; }
+
+    footer {
+      background: var(--color-surface); border-top: 1px solid var(--color-border);
+      padding: 32px 0; text-align: center; font-size: 0.82rem; color: var(--color-muted);
+    }
+    footer a { color: var(--color-muted); }
+    footer a:hover { color: var(--color-text); text-decoration: none; }
+  </style>
+</head>
+<body>
+
+  <header>
+    <nav>
+      <a class="nav-back" href="/">← Joe Foreman</a>
+      <div class="nav-right">
+        <span class="nav-title">Health &amp; Metabolism</span>
+        <button id="theme-toggle" class="theme-toggle"
+                type="button"
+                aria-label="Toggle day / night mode"
+                title="Toggle day / night mode">
+          <svg class="icon-moon" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79Z"/>
+          </svg>
+          <svg class="icon-sun" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="12" r="4"/>
+            <path d="M12 2v2M12 20v2M4.93 4.93l1.41 1.41M17.66 17.66l1.41 1.41M2 12h2M20 12h2M4.93 19.07l1.41-1.41M17.66 6.34l1.41-1.41"/>
+          </svg>
+        </button>
+      </div>
+    </nav>
+  </header>
+
+  <main class="page">
+    <span class="page-tag">Immunology &amp; Nutrition</span>
+    <h1 class="page-title">Health &amp; Metabolism</h1>
+    <p class="page-subtitle">
+      Mechanistic reviews on nutrition, immunology, and biochemistry —
+      tracing the molecular biology from first principles to clinical evidence.
+    </p>
+
+    <div class="articles">
+
+      <a class="article-card" href="vitamin-d.html">
+        <span class="article-icon">☀️</span>
+        <div class="article-body">
+          <div class="article-title">Vitamin D &amp; Infection Susceptibility</div>
+          <p class="article-desc">A mechanistic review tracing vitamin D from UVB photolysis in skin to cathelicidin production in macrophages — and what clinical trials say about infection susceptibility.</p>
+        </div>
+        <span class="article-arrow">→</span>
+      </a>
+
+    </div>
+  </main>
+
+  <footer>
+    &copy; <span id="yr"></span> Joe Foreman. All rights reserved.
+    <script>document.getElementById('yr').textContent = new Date().getFullYear();</script>
+  </footer>
+
+  <script src="/assets/theme.js" defer></script>
+
+</body>
+</html>
