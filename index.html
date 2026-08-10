@@ -123,6 +123,52 @@
     }
 
     /* ─────────────────────────────────────────
+       TOPIC GROUPS (Biomedical, Physics, …)
+    ───────────────────────────────────────── */
+
+    /* ── HOW TO ADD A NEW TOPIC GROUP ───────────────────────────────────────
+       Copy a block below (from <!-- TOPIC GROUP --> to <!-- /TOPIC GROUP -->)
+       and paste it inside #sites in the HTML below.
+       Fill in:
+         topic-heading → the topic name (e.g. Chemistry)
+         topic-intro   → one-sentence description of the topic
+       Then put one or more SITE CARDs inside its .cards-grid.
+    ──────────────────────────────────────────────────────────────────────── */
+
+    .topic-group + .topic-group {
+      margin-top: 56px;
+      padding-top: 48px;
+      border-top: 1px solid var(--color-border);
+    }
+
+    .topic-heading {
+      font-size: 1.5rem;
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--color-text);
+      margin-bottom: 6px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .topic-heading::before {
+      content: '';
+      width: 6px;
+      height: 26px;
+      border-radius: 4px;
+      background: linear-gradient(180deg, var(--color-accent), var(--color-accent-2));
+      flex-shrink: 0;
+    }
+
+    .topic-intro {
+      font-size: 0.95rem;
+      color: var(--color-muted);
+      margin-bottom: 24px;
+      max-width: 620px;
+    }
+
+    /* ─────────────────────────────────────────
        HEADER / NAV
     ───────────────────────────────────────── */
     header {
@@ -451,7 +497,8 @@
       <span class="nav-logo">Joe Foreman</span>
       <div class="nav-right">
         <ul class="nav-links">
-          <li><a href="#sites">Topics</a></li>
+          <li><a href="#biomedical">Biomedical</a></li>
+          <li><a href="#physics">Physics</a></li>
           <li><a href="#videos">Videos</a></li>
         </ul>
         <button id="theme-toggle" class="theme-toggle"
@@ -501,51 +548,76 @@
       <p class="section-label">Topics</p>
       <h2 class="section-title">My sites</h2>
 
-      <div class="cards-grid">
+      <!-- ══════════════════════════════════
+           ADD TOPIC GROUPS / SITE CARDS HERE
+           See the comments above .topic-group {}
+           and .card {} in the CSS for instructions.
+           ══════════════════════════════════ -->
 
-        <!-- ══════════════════════════════════
-             ADD SITE CARDS HERE
-             See the comment above .card {} in
-             the CSS for instructions.
-             ══════════════════════════════════ -->
+      <!-- EXAMPLE CARD — copy this into a .cards-grid below
+      <a class="card" href="/example-topic/">
+        <span class="card-tag">Example</span>
+        <div class="card-title">Example Topic</div>
+        <p class="card-desc">A short description of what this site is about and who it's for.</p>
+        <span class="card-arrow">Read more →</span>
+      </a>
+      -->
 
-        <!-- EXAMPLE CARD — delete this when you add real ones
-        <a class="card" href="/example-topic/">
-          <span class="card-tag">Example</span>
-          <div class="card-title">Example Topic</div>
-          <p class="card-desc">A short description of what this site is about and who it's for.</p>
-          <span class="card-arrow">Read more →</span>
-        </a>
-        -->
+      <!-- TOPIC GROUP -->
+      <div class="topic-group" id="biomedical">
+        <h3 class="topic-heading">Biomedical</h3>
+        <p class="topic-intro">
+          Molecular biology, nutrition, and immunology — mechanistic reviews that
+          follow the evidence from first principles to the clinic.
+        </p>
 
-        <!-- SITE CARD -->
-        <a class="card" href="cancer-ai/">
-          <span class="card-tag">Health &amp; Research</span>
-          <div class="card-title">Cancer &amp; AI</div>
-          <p class="card-desc">AI-assisted research into cancer metabolism, the foods that fuel tumors, and what the science says about diet and cancer risk.</p>
-          <span class="card-arrow">Read more →</span>
-        </a>
-        <!-- /SITE CARD -->
+        <div class="cards-grid">
 
-        <!-- SITE CARD -->
-        <a class="card" href="astromechanics/">
-          <span class="card-tag">Classical Mechanics</span>
-          <div class="card-title">Astromechanics</div>
-          <p class="card-desc">Orbital dynamics and the mathematics of gravity — exact derivations from first principles, including the two-body problem and Kepler's laws.</p>
-          <span class="card-arrow">Read more →</span>
-        </a>
-        <!-- /SITE CARD -->
+          <!-- SITE CARD -->
+          <a class="card" href="cancer-ai/">
+            <span class="card-tag">Cancer Research</span>
+            <div class="card-title">Cancer &amp; AI</div>
+            <p class="card-desc">AI-assisted research into cancer metabolism, the foods that fuel tumors, and what the science says about diet and cancer risk.</p>
+            <span class="card-arrow">Read more →</span>
+          </a>
+          <!-- /SITE CARD -->
 
-        <!-- SITE CARD -->
-        <a class="card" href="joe_metabolism/">
-          <span class="card-tag">Health &amp; Metabolism</span>
-          <div class="card-title">Health &amp; Metabolism</div>
-          <p class="card-desc">Mechanistic reviews on nutrition, immunology, and biochemistry — including a deep-dive into Vitamin D's role in infection susceptibility.</p>
-          <span class="card-arrow">Read more →</span>
-        </a>
-        <!-- /SITE CARD -->
+          <!-- SITE CARD -->
+          <a class="card" href="joe_metabolism/">
+            <span class="card-tag">Nutrition &amp; Immunology</span>
+            <div class="card-title">Vitamin D</div>
+            <p class="card-desc">A deep-dive into Vitamin D — from UVB photolysis in the skin to its role in immune defense and infection susceptibility.</p>
+            <span class="card-arrow">Read more →</span>
+          </a>
+          <!-- /SITE CARD -->
 
+        </div>
       </div>
+      <!-- /TOPIC GROUP -->
+
+      <!-- TOPIC GROUP -->
+      <div class="topic-group" id="physics">
+        <h3 class="topic-heading">Physics</h3>
+        <p class="topic-intro">
+          Exact derivations from first principles — the mathematics behind how
+          things move.
+        </p>
+
+        <div class="cards-grid">
+
+          <!-- SITE CARD -->
+          <a class="card" href="astromechanics/">
+            <span class="card-tag">Classical Mechanics</span>
+            <div class="card-title">Astromechanics</div>
+            <p class="card-desc">Orbital dynamics and the mathematics of gravity — exact derivations from first principles, including the two-body problem and Kepler's laws.</p>
+            <span class="card-arrow">Read more →</span>
+          </a>
+          <!-- /SITE CARD -->
+
+        </div>
+      </div>
+      <!-- /TOPIC GROUP -->
+
     </div>
   </section>
 
